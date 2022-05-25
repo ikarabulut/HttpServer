@@ -1,6 +1,6 @@
 # Echo Server
 
-[![CI](https://github.com/ikarabulut/HttpServer/actions/workflows/gradle.yml/badge.svg)](https://github.com/ikarabulut/HttpServer/actions/workflows/gradle.yml)
+[![CI](https://github.com/ikarabulut/EchoServer/actions/workflows/gradle.yml/badge.svg)](https://github.com/ikarabulut/EchoServer/actions/workflows/gradle.yml)
 
 ---
 This project is built in [Java (OpenJDK 18)](https://www.oracle.com/java/technologies/downloads/) using [Gradle](https://docs.gradle.org/current/userguide/userguide.html).
@@ -31,8 +31,8 @@ A user should be able to interact with the echo server as follows:
 ---
 1. Clone the repo to your machine, and `cd` into the directory
 ```
-git clone https://github.com/ikarabulut/HttpServer.git
-cd HttpServer
+git clone https://github.com/ikarabulut/EchoServer.git
+cd EchoServer
 ```
 2. Build the App
 ```
