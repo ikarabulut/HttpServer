@@ -27,3 +27,4 @@ jobs:
           arguments: build
       - name: Test
         run: ./gradlew test
+        uses: romeovs/lcov-reporter-action@v0.2.11
