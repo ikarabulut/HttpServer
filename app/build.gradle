@@ -16,6 +16,8 @@ application {
     mainClass = 'com.ikarabulut.App'
 }
 
+testResultsDirName = "$buildDir/junit-xml"
+
 tasks.named('test') {
     useJUnitPlatform()
     testLogging {
