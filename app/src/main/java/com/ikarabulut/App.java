@@ -3,8 +3,23 @@
  */
 package com.ikarabulut;
 
+import java.io.IOException;
+import java.net.ServerSocket;
+
 public class App {
     public static void main(String[] args) {
+        int port = 5000;
+        ServerIO io = new ServerIO();
 
+        try {
+            ServerSocket serverSocket = new ServerSocket(port);
+            System.out.println("You are connected to port: " + port);
+            EchoServer echoServer = new EchoServer(serverSocket);
+            echoServer.createServerEndPoint(io);
+            echoServer.beginEcho();
+        } catch (IOException ex) {
+            System.err.print(ex.getMessage());
+        }
     }
+
 }
