@@ -22,14 +22,14 @@ public class EchoServer {
         echoReader = io.generateClientSocketReader(clientSocket);
     }
 
-    public void beginEcho() throws IOException {
+    public void beginEcho(ServerIO io) throws IOException {
         String inputLine;
-        while ((inputLine = echoReader.readLine()) != null) {
+        while ((inputLine = io.readInput(echoReader)) != null) {
             if (".".equals(inputLine)) {
                 System.out.println("Thank you for trying my Echo Server");
                 break;
             }
-            echoWriter.println(inputLine);
+            io.printOutput(echoWriter, inputLine);
         }
     }
 

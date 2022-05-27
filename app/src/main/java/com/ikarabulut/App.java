@@ -16,7 +16,7 @@ public class App {
             System.out.println("You are connected to port: " + port);
             EchoServer echoServer = new EchoServer(serverSocket);
             echoServer.createServerEndPoint(io);
-            echoServer.beginEcho();
+            echoServer.beginEcho(io);
         } catch (IOException ex) {
             System.err.print(ex.getMessage());
         }
