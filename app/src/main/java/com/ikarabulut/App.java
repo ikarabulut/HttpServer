@@ -8,12 +8,12 @@ import java.net.ServerSocket;
 
 public class App {
     public static void main(String[] args) {
-        int port = 5000;
+        int PORT = 5000;
         ServerIO io = new ServerIO();
 
         try {
-            ServerSocket serverSocket = new ServerSocket(port);
-            System.out.println("You are connected to port: " + port);
+            ServerSocket serverSocket = new ServerSocket(PORT);
+            System.out.println("You are connected to port: " + PORT);
             EchoServer echoServer = new EchoServer(serverSocket);
             echoServer.createServerEndPoint(io);
             echoServer.beginEcho(io);

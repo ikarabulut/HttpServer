@@ -59,7 +59,7 @@ class ServerIOTest {
     }
 
     @Test
-    @DisplayName("When a socket writer gets created, then null should not be returned")
+    @DisplayName("When a socket writer gets created, then null should not be returned, meaning a PrintWriter was returned")
     void createSocketWriter() throws IOException {
         ServerIO io = new ServerIO();
         Socket mockSocket = mock(Socket.class);
@@ -67,10 +67,11 @@ class ServerIOTest {
         when(mockSocket.getOutputStream()).thenReturn(mockOutputStream);
 
         assertNotNull(io.generateClientSocketWriter(mockSocket));
+        assertEquals(PrintWriter.class, io.generateClientSocketWriter(mockSocket).getClass());
     }
 
     @Test
-    @DisplayName("When a socket reader gets created, then null should not be returned")
+    @DisplayName("When a socket reader gets created, then null should not be returned, meaning a BufferedReader was returned")
     void createSocketReader() throws IOException {
         ServerIO io = new ServerIO();
         Socket mockSocket = mock(Socket.class);
@@ -79,6 +80,8 @@ class ServerIOTest {
         when(mockSocket.getInputStream()).thenReturn(mockInputStream);
 
         assertNotNull(io.generateClientSocketReader(mockSocket));
+        assertEquals(BufferedReader.class, io.generateClientSocketReader(mockSocket).getClass());
+
     }
 
 
