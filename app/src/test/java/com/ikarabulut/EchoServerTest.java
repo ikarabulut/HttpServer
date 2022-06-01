@@ -16,8 +16,9 @@ class EchoServerTest {
     @DisplayName("When a new EchoServer object is created, a connection will be made to the provided port number, in this case 5000")
     void ObjectCreationOpensNewConnection() throws IOException {
         int port = 5000;
+        ServerIO mockIo = mock(ServerIO.class);
         ServerSocket serverSocket = new ServerSocket(port);
-        EchoServer echoServer = new EchoServer(serverSocket);
+        EchoServer echoServer = new EchoServer(serverSocket, mockIo);
         ServerSocket connectedServerSocket = echoServer.getServerSocket();
 
         assertEquals(port, connectedServerSocket.getLocalPort());
@@ -26,8 +27,9 @@ class EchoServerTest {
     @Test
     @DisplayName("When a server socket accepts requests, a client socket will be returned")
     void createClientSocket() throws IOException {
+        ServerIO mockIo = mock(ServerIO.class);
         ServerSocket mockServerSocket = mock(ServerSocket.class);
-        EchoServer echoServer = new EchoServer(mockServerSocket);
+        EchoServer echoServer = new EchoServer(mockServerSocket, mockIo);
         Socket newClientSocket = new Socket();
 
         when(mockServerSocket.accept()).thenReturn(newClientSocket);

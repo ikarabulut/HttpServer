@@ -14,7 +14,7 @@ class ServerIOTest {
 
     @Test
     @DisplayName("When a new Input stream is created and 'hello' is passed, then system.in should be 'hello'")
-    void readInputStream_WithHello() {
+    void readInputStream_WithHello() throws IOException {
         ServerIO io = new ServerIO();
         String inputStream = "Hello";
         BufferedReader input = new BufferedReader(new InputStreamReader(new ByteArrayInputStream(inputStream.getBytes())));
@@ -24,7 +24,7 @@ class ServerIOTest {
 
     @Test
     @DisplayName("When an input of 1 is passed, then readInputStream should return 1")
-    void readInputStream_With1() {
+    void readInputStream_With1() throws IOException {
         ServerIO io = new ServerIO();
         String inputStream = "1";
         BufferedReader input = new BufferedReader(new InputStreamReader(new ByteArrayInputStream(inputStream.getBytes())));

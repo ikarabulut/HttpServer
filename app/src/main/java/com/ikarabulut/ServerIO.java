@@ -7,13 +7,8 @@ import java.io.PrintWriter;
 import java.net.Socket;
 
 public class ServerIO {
-    public String readInput(BufferedReader input) {
-        try {
-            return input.readLine();
-        } catch (IOException ex) {
-            System.err.print(ex.getMessage());
-        }
-        return null;
+    public String readInput(BufferedReader input) throws IOException {
+        return input.readLine();
     }
 
     public void printOutput(PrintWriter output, String input) {

@@ -7,22 +7,28 @@ import java.net.ServerSocket;
 import java.net.Socket;
 
 public class EchoServer {
+    private ServerIO io;
     private Socket clientSocket;
     private ServerSocket serverSocket;
     private PrintWriter echoWriter;
     private BufferedReader echoReader;
 
-    public EchoServer(ServerSocket connectedServerSocket) {
+    public EchoServer(ServerSocket connectedServerSocket, ServerIO io) {
         serverSocket = connectedServerSocket;
+        this.io = io;
     }
 
-    public void createServerEndPoint(ServerIO io) throws IOException {
-        clientSocket = createClientSocket(serverSocket);
-        echoWriter = io.generateClientSocketWriter(clientSocket);
-        echoReader = io.generateClientSocketReader(clientSocket);
+    public void createServerEndPoint() {
+        try {
+            clientSocket = createClientSocket(serverSocket);
+            echoWriter = io.generateClientSocketWriter(clientSocket);
+            echoReader = io.generateClientSocketReader(clientSocket);
+        } catch (IOException ex) {
+            System.err.print("Unable to create server endpoint");
+        }
     }
 
-    public void beginEcho(ServerIO io) throws IOException {
+    public void beginEcho() throws IOException {
         String inputLine;
         while ((inputLine = io.readInput(echoReader)) != null) {
             if (".".equals(inputLine)) {
@@ -33,13 +39,8 @@ public class EchoServer {
         }
     }
 
-    public Socket createClientSocket(ServerSocket serverSocket) {
-        try {
-            return serverSocket.accept();
-        } catch (IOException ex) {
-            System.err.print(ex.getMessage());
-        }
-        return null;
+    public Socket createClientSocket(ServerSocket serverSocket) throws IOException {
+        return serverSocket.accept();
     }
 
     public ServerSocket getServerSocket() {
