@@ -13,7 +13,7 @@ import static org.mockito.Mockito.when;
 class ServerIOTest {
 
     @Test
-    @DisplayName("When a new Input stream is created, and 'hello' is passed. the system.in should be 'hello'")
+    @DisplayName("When a new Input stream is created and 'hello' is passed, then system.in should be 'hello'")
     void readInputStream_WithHello() {
         ServerIO io = new ServerIO();
         String inputStream = "Hello";

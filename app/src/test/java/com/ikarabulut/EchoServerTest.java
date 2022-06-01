@@ -3,6 +3,7 @@ package com.ikarabulut;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import java.io.BufferedReader;
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
@@ -27,10 +28,13 @@ class EchoServerTest {
     void createClientSocket() throws IOException {
         ServerSocket mockServerSocket = mock(ServerSocket.class);
         EchoServer echoServer = new EchoServer(mockServerSocket);
+        Socket newClientSocket = new Socket();
 
-        when(mockServerSocket.accept()).thenReturn(new Socket());
+        when(mockServerSocket.accept()).thenReturn(newClientSocket);
 
         assertNotNull(echoServer.createClientSocket(mockServerSocket));
+        assertEquals(newClientSocket, echoServer.createClientSocket(mockServerSocket));
+
 
     }
 
