@@ -3,12 +3,23 @@
  */
 package com.ikarabulut;
 
+import java.io.IOException;
+import java.net.ServerSocket;
+
 public class App {
-    public String getGreeting() {
-        return "Hello World!";
+    public static void main(String[] args) {
+        int PORT = 5000;
+        ServerIO io = new ServerIO();
+
+        try {
+            ServerSocket serverSocket = new ServerSocket(PORT);
+            System.out.println("You are connected to port: " + PORT);
+            EchoServer echoServer = new EchoServer(serverSocket, io);
+            echoServer.createServerEndPoint();
+            echoServer.beginEcho();
+        } catch (IOException ex) {
+            System.err.print(ex.getMessage());
+        }
     }
 
-    public static void main(String[] args) {
-        System.out.println(new App().getGreeting());
-    }
 }

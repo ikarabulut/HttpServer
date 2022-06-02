@@ -17,7 +17,7 @@ This project is built in [Java (OpenJDK 18)](https://www.oracle.com/java/technol
 - **Gradle**
   - Follow these [Gradle doc instructions](https://gradle.org/install/)
 
-# Functional Requirements
+## Functional Requirements
 
 ---
 A user should be able to interact with the echo server as follows:
@@ -26,7 +26,7 @@ A user should be able to interact with the echo server as follows:
 - A client can send multiple messages to the server and get the echoed response back each time.
 - Multiple clients can send messages to server and get back their proper responses.
 
-# Installation
+## Installation
 
 ---
 1. Clone the repo to your machine, and `cd` into the directory
@@ -38,3 +38,11 @@ cd EchoServer
 ```
 gradle build
 ```
+
+## To run the server
+
+---
+1. While in the project root directory execute `gradle run`
+2. Open a new terminal window
+3. Within the new window execute `nc localhost 5000`
+4. An empty prompt will appear, whatever you type will be echoed after you press `enter`
