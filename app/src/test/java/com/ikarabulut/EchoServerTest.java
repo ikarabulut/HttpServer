@@ -18,7 +18,7 @@ class EchoServerTest {
         int port = 5000;
         ServerIO mockIo = mock(ServerIO.class);
         ServerSocket serverSocket = new ServerSocket(port);
-        EchoServer echoServer = new EchoServer(serverSocket, mockIo);
+        EchoServer echoServer = new EchoServer(serverSocket);
         ServerSocket connectedServerSocket = echoServer.getServerSocket();
 
         assertEquals(port, connectedServerSocket.getLocalPort());
@@ -29,13 +29,13 @@ class EchoServerTest {
     void createClientSocket() throws IOException {
         ServerIO mockIo = mock(ServerIO.class);
         ServerSocket mockServerSocket = mock(ServerSocket.class);
-        EchoServer echoServer = new EchoServer(mockServerSocket, mockIo);
+        EchoServer echoServer = new EchoServer(mockServerSocket);
         Socket newClientSocket = new Socket();
 
         when(mockServerSocket.accept()).thenReturn(newClientSocket);
 
-        assertNotNull(echoServer.createClientSocket(mockServerSocket));
-        assertEquals(newClientSocket, echoServer.createClientSocket(mockServerSocket));
+        assertNotNull(echoServer.createClientSocket());
+        assertEquals(newClientSocket, echoServer.createClientSocket());
 
 
     }
