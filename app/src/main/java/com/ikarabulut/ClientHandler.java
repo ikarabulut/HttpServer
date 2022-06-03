@@ -20,7 +20,7 @@ public class ClientHandler implements Runnable {
 
     public void run() {
         String inputLine;
-        ioStream.printOutput(writer, "You are connected to the Server");
+        ioStream.printOutput(writer, "You are connected to the Server, any input will be echoed back to you. To exit the connection please enter '.'");
         try {
             while ((inputLine = ioStream.readInput(reader)) != null) {
                 if (".".equals(inputLine)) {
