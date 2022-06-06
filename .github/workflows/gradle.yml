@@ -27,3 +27,10 @@ jobs:
           arguments: build
       - name: Test
         run: ./gradlew test
+      - name: Upload coverage to CodeCov
+        uses: codecov/codecov-action@v3
+        with:
+          flags: unittests
+          name: codecov-umbrella
+          fail_ci_if_error: true
+          verbose: true
