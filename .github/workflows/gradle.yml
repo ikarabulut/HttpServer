@@ -30,7 +30,6 @@ jobs:
       - name: Upload coverage to CodeCov
         uses: codecov/codecov-action@v2
         with:
-          directory: ./app/build/test/customJacocoReportDir
           flags: unittests
           name: codecov-umbrella
           fail_ci_if_error: true
