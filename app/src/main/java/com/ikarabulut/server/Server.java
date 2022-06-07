@@ -1,13 +1,13 @@
-package com.ikarabulut;
+package com.ikarabulut.server;
 
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
 
-public class EchoServer {
+public class Server {
     private ServerSocket serverSocket;
 
-    public EchoServer(ServerSocket serverSocket) throws IOException {
+    public Server(ServerSocket serverSocket) throws IOException {
         this.serverSocket = serverSocket;
     }
 

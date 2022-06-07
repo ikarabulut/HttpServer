@@ -1,5 +1,7 @@
 package com.ikarabulut;
 
+import com.ikarabulut.server.Server;
+
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
@@ -17,7 +19,7 @@ public class App {
         try {
             ServerSocket serverSocket = new ServerSocket(PORT);
             ServerIO io = new ServerIO();
-            EchoServer echo = new EchoServer(serverSocket);
+            Server echo = new Server(serverSocket);
             System.out.println("You are running on port: " + PORT);
             while (true) {
                 Socket clientSocket = echo.createClientSocket();
