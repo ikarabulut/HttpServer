@@ -42,11 +42,4 @@ public class ClientHandler implements Runnable {
         reader.close();
     }
 
-    public BufferedReader getReader() {
-        return reader;
-    }
-
-    public PrintWriter getWriter() {
-        return writer;
-    }
 }
