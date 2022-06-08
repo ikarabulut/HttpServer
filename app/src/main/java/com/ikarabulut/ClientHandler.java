@@ -8,29 +8,21 @@ import java.net.Socket;
 public class ClientHandler implements Runnable {
     private PrintWriter writer;
     private BufferedReader reader;
-    private ServerIO ioStream;
+    private ServerIO serverIO;
     private Socket clientSocket;
 
-    public ClientHandler(Socket clientSocket, ServerIO io) throws IOException {
-        ioStream = io;
+    public ClientHandler(Socket clientSocket, ServerIO serverIO) throws IOException {
+        this.serverIO = serverIO;
         this.clientSocket = clientSocket;
-        writer = io.generateClientSocketWriter(clientSocket);
-        reader = io.generateClientSocketReader(clientSocket);
+        writer = serverIO.generateClientSocketWriter(clientSocket);
+        reader = serverIO.generateClientSocketReader(clientSocket);
     }
 
     public void run() {
         String inputLine;
-        ioStream.printOutput(writer, "You are connected to the Server, any input will be echoed back to you. To exit the connection please enter '.'");
         try {
-            while ((inputLine = ioStream.readInput(reader)) != null) {
-                if (".".equals(inputLine)) {
-                    ioStream.printOutput(writer, "Thank you for using my Echo Server, Disconnecting");
-                    closeClientConnection();
-                    System.out.println("A client connection has been disconnected");
-                    break;
-                }
-                ioStream.printOutput(writer, inputLine);
-            }
+            inputLine = serverIO.readInput(reader);
+            serverIO.printOutput(writer, inputLine);
         } catch (IOException ex) {
             ex.printStackTrace();
         }

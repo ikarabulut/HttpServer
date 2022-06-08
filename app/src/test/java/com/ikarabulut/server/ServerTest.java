@@ -13,32 +13,16 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
 class ServerTest {
+
+    private ServerWrapper serverWrapper = mock(ServerWrapper.class);
+    private ServerIO serverIO = mock(ServerIO.class);
     @Test
-    @DisplayName("When a new EchoServer object is created, a connection will be made to the provided port number, in this case 5000")
-    void ObjectCreationOpensNewConnection() throws IOException {
+    @DisplayName("When a new Server object is created, the passed port int will provided port number, in this case 5000")
+    void createNewServerObject() {
         int port = 5000;
-        ServerIO mockIo = mock(ServerIO.class);
-        ServerSocket serverSocket = new ServerSocket(port);
-        Server server = new Server(serverSocket);
-        ServerSocket connectedServerSocket = server.getServerSocket();
+        Server server = new Server(port, serverWrapper, serverIO);
 
-        assertEquals(port, connectedServerSocket.getLocalPort());
-    }
-
-    @Test
-    @DisplayName("When a server socket accepts requests, a client socket will be returned")
-    void createClientSocket() throws IOException {
-        ServerIO mockIo = mock(ServerIO.class);
-        ServerSocket mockServerSocket = mock(ServerSocket.class);
-        Server server = new Server(mockServerSocket);
-        Socket newClientSocket = new Socket();
-
-        when(mockServerSocket.accept()).thenReturn(newClientSocket);
-
-        assertNotNull(server.createClientSocket());
-        assertEquals(newClientSocket, server.createClientSocket());
-
-
+        assertEquals(port, server.getPort());
     }
 
 
