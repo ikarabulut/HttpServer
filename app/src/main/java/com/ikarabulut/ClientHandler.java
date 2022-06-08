@@ -1,7 +1,10 @@
 package com.ikarabulut;
 
+import com.ikarabulut.parser.RequestParser;
+
 import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.PrintWriter;
 import java.net.Socket;
 
@@ -19,13 +22,15 @@ public class ClientHandler implements Runnable {
     }
 
     public void run() {
-        String inputLine;
+        BufferedReader request = reader;
         try {
-            inputLine = serverIO.readInput(reader);
-            serverIO.printOutput(writer, inputLine);
-        } catch (IOException ex) {
-            ex.printStackTrace();
+            System.out.println(request.readLine());
+            System.out.println(request.readLine());
+            System.out.println(request.readLine());
+        } catch (IOException e) {
+            throw new RuntimeException(e);
         }
+        RequestParser requestParser = new RequestParser(request);
     }
 
     public void closeClientConnection() throws IOException {
