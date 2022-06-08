@@ -1,13 +1,8 @@
 package com.ikarabulut.server;
 
 import com.ikarabulut.ServerIO;
-import com.ikarabulut.server.Server;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-
-import java.io.IOException;
-import java.net.ServerSocket;
-import java.net.Socket;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
