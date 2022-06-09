@@ -1,7 +1,7 @@
 package com.ikarabulut.server;
 
-import com.ikarabulut.ClientHandler;
-import com.ikarabulut.ServerIO;
+import com.ikarabulut.handlers.ClientHandler;
+import com.ikarabulut.io.ServerIO;
 
 import java.io.IOException;
 import java.net.ServerSocket;

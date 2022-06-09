@@ -1,4 +1,4 @@
-package com.ikarabulut;
+package com.ikarabulut.io;
 
 import java.io.*;
 import java.net.Socket;

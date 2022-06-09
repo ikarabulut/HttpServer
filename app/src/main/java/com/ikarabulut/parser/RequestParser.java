@@ -13,16 +13,17 @@ public class RequestParser {
         this.request = request;
     }
 
-    public void parseInitialLine() throws IOException {
+    public HashMap<String, String> parseInitialLine() throws IOException {
         String initialLineString = request.readLine();
         initialLine = new HashMap<>();
         String[] splitRequestLine = initialLineString.split(" ", 3);
         initialLine.put("httpMethod", splitRequestLine[0]);
         initialLine.put("httpPath", splitRequestLine[1]);
         initialLine.put("httpVersion", splitRequestLine[2]);
+        return initialLine;
     }
 
-    public void parseHeaders() throws IOException {
+    public HashMap<String, String> parseHeaders() throws IOException {
         String throwAwayFirstLine = request.readLine();
         String headerString;
         headers = new HashMap<>();
@@ -36,6 +37,7 @@ public class RequestParser {
             String headerValue = splitHeader[1];
             headers.put(headerKey, headerValue);
         }
+        return headers;
     }
 
     public HashMap<String, String> getInitialLine() {

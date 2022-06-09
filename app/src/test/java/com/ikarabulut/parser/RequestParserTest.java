@@ -27,8 +27,7 @@ class RequestParserTest {
         expectedInitialLine.put("httpPath", "/test");
         expectedInitialLine.put("httpVersion", "HTTP/1.1");
 
-        requestParser.parseInitialLine();
-        HashMap<String, String> returnedInitialLine = requestParser.getInitialLine();
+        HashMap<String, String> returnedInitialLine = requestParser.parseInitialLine();
 
         assertEquals(expectedInitialLine, returnedInitialLine);
     }
@@ -45,8 +44,7 @@ class RequestParserTest {
         expectedHeaders.put("Content-Type:", "text/plain");
         expectedHeaders.put("User-Agent:", "PostmanRuntime/7.29.0");
 
-        requestParser.parseHeaders();
-        HashMap<String, String> returnedHeaders = requestParser.getHeaders();
+        HashMap<String, String> returnedHeaders = requestParser.parseHeaders();
 
         assertEquals(expectedHeaders, returnedHeaders);
     }

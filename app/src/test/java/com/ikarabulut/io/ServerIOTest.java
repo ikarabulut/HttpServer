@@ -1,5 +1,6 @@
-package com.ikarabulut;
+package com.ikarabulut.io;
 
+import com.ikarabulut.io.ServerIO;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
