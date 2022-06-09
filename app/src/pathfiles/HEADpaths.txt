@@ -1,0 +1,2 @@
+/simple_get
+/head_request
