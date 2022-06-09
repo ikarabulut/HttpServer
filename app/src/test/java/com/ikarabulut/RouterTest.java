@@ -26,6 +26,4 @@ class RouterTest {
         Mockito.verify(spyRouter).runHeadRequest(httpPath, httpVersion);
     }
 
-    
-
 }

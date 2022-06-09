@@ -16,7 +16,7 @@ class HeadRequestRunnerTest {
     private List<String> acceptedPaths = new ArrayList<>();
 
     private void expectedGetValidPaths() {
-        File allowedPaths = new File("/Users/8thlight/learning-trails/java/HttpServer/app/src/pathfiles/HEADpaths.txt");
+        File allowedPaths = new File("src/pathfiles/HEADpaths.txt");
         try {
             Scanner fileReader = new Scanner(allowedPaths);
             while (fileReader.hasNextLine()) {
