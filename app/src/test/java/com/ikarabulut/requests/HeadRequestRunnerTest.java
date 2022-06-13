@@ -29,7 +29,7 @@ class HeadRequestRunnerTest {
         initialLine.put("httpMethod", "HEAD");
         initialLine.put("httpPath", "/simple_get");
         initialLine.put("httpVersion", "HTTP/1.1");
-        
+
         HeadRequestRunner headRequestRunner = new HeadRequestRunner(initialLine);
 
         assertTrue(headRequestRunner.isValidPath());

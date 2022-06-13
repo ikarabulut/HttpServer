@@ -1,5 +1,7 @@
 package com.ikarabulut.response;
 
+import com.ikarabulut.response.status.StatusCode;
+
 import java.util.Date;
 
 public class HeadResponseHandler {
@@ -23,10 +25,10 @@ public class HeadResponseHandler {
     }
 
     private void generateInitialResponseLine() {
-        String statusCode = StatusCode.OK.getStatusCode();
-        String result = String.valueOf(StatusCode.OK);
+        StatusCode statusCode = StatusCode.OK;
+        String statusNumber = statusCode.getStatusNumber();
 
-        initialResponseLine = httpVersion + " " + statusCode + " " + result + CRLF;
+        initialResponseLine = httpVersion + " " + statusNumber + " " + statusCode + CRLF;
     }
 
     private void generateResponseHeaderLines() {
