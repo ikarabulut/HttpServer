@@ -15,17 +15,17 @@ import static java.util.concurrent.TimeUnit.SECONDS;
 
 public class Server {
     private int port;
-    private ServerWrapper serverWrapper;
+    private ServerFactory serverFactory;
     private ServerIO serverIO;
 
-    public Server(int port, ServerWrapper serverWrapper, ServerIO serverIO) {
+    public Server(int port, ServerFactory serverFactory, ServerIO serverIO) {
         this.port = port;
-        this.serverWrapper = serverWrapper;
+        this.serverFactory = serverFactory;
         this.serverIO = serverIO;
     }
 
     public void start() {
-        ServerSocket serverSocket = serverWrapper.createServerSocket(port);
+        ServerSocket serverSocket = serverFactory.createServerSocket(port);
 
         int corePoolSize = 5;
         int maximumPoolSize = 5;
@@ -35,9 +35,9 @@ public class Server {
         ThreadPoolExecutor threadPool = new ThreadPoolExecutor(corePoolSize, maximumPoolSize, keepALiveTime, keepAliveTimeunit, linkedBlockingQueue);
 
         while (serverSocket.isBound()) {
-            Socket clientSocket = serverWrapper.createClientSocket(serverSocket);
+            Socket clientSocket = serverFactory.createClientSocket(serverSocket);
             try {
-                threadPool.execute(new ClientHandler(clientSocket,serverIO));
+                threadPool.execute(new ClientHandler(clientSocket, serverIO));
             } catch (IOException ex) {
                 ex.printStackTrace();
             }

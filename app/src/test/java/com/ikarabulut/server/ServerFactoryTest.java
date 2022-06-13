@@ -10,14 +10,14 @@ import java.net.Socket;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
-class ServerWrapperTest {
-    private ServerWrapper serverWrapper = new ServerWrapper();
+class ServerFactoryTest {
+    private ServerFactory serverFactory = new ServerFactory();
 
     @Test
     @DisplayName("A new ServerSocket should be created with the passed port number")
     void createServerSocket() {
         int port = 5000;
-        ServerSocket serverSocket = serverWrapper.createServerSocket(port);
+        ServerSocket serverSocket = serverFactory.createServerSocket(port);
 
         int createdServerSocketPort = serverSocket.getLocalPort();
         assertEquals(port, createdServerSocketPort);
@@ -30,7 +30,7 @@ class ServerWrapperTest {
         Socket clientSocket = mock(Socket.class);
 
         when(serverSocket.accept()).thenReturn(clientSocket);
-        Socket generatedClientSocket = serverWrapper.createClientSocket(serverSocket);
+        Socket generatedClientSocket = serverFactory.createClientSocket(serverSocket);
 
         verify(serverSocket).accept();
         assertNotNull(generatedClientSocket);

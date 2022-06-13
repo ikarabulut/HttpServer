@@ -4,7 +4,7 @@ import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
 
-public class ServerWrapper {
+public class ServerFactory {
 
     public ServerSocket createServerSocket(int port) {
         try {

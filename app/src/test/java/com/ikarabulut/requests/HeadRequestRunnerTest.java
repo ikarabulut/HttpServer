@@ -46,7 +46,7 @@ class HeadRequestRunnerTest {
 
 
     @Test
-    @DisplayName("When a passed path is not allowed then isValidPath should return false")
+    @DisplayName("When a path is not allowed then isValidPath should return false")
     void isAllowedPath_NotAllowed() {
         HashMap<String, String> initialLine = new HashMap<>();
         initialLine.put("httpMethod", "HEAD");
@@ -58,7 +58,7 @@ class HeadRequestRunnerTest {
     }
 
     @Test
-    @DisplayName("When a passed path is allowed then isValidPath should return true")
+    @DisplayName("When a path is allowed then isValidPath should return true")
     void isAllowedPath_IsAllowed() {
         HashMap<String, String> initialLine = new HashMap<>();
         initialLine.put("httpMethod", "HEAD");
