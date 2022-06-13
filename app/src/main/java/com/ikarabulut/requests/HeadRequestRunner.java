@@ -2,23 +2,16 @@ package com.ikarabulut.requests;
 
 import com.ikarabulut.response.HeadResponseHandler;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 
 public class HeadRequestRunner {
-    List<String> acceptedPaths = new ArrayList<>();
+    List<String> acceptedPaths;
     String httpPath;
     String httpVersion;
     public HeadRequestRunner(HashMap<String, String> initialLine) {
         this.httpPath = initialLine.get("httpPath");
         this.httpVersion = initialLine.get("httpVersion");
-        getValidPaths();
+        this.acceptedPaths = new ArrayList<>( Arrays.asList("/simple_get", "/head_request"));
     }
 
     public String processResponse(boolean isValidPath) {
@@ -32,20 +25,6 @@ public class HeadRequestRunner {
 
     public List<String> getAcceptedPaths() {
         return acceptedPaths;
-    }
-
-    private void getValidPaths() {
-        File allowedPaths = new File("src/pathfiles/HEADpaths.txt");
-        try {
-            Scanner fileReader = new Scanner(allowedPaths);
-            while (fileReader.hasNextLine()) {
-                String path = fileReader.nextLine();
-                acceptedPaths.add(path);
-            }
-            fileReader.close();
-        } catch (FileNotFoundException ex) {
-            ex.printStackTrace();
-        }
     }
 
 }
