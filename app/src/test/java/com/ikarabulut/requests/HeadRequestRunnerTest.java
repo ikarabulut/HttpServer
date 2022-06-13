@@ -33,12 +33,9 @@ class HeadRequestRunnerTest {
     @DisplayName("When a HeadRequestRunner is constructed the accepted paths should be generated from the pathfiles directory and its HEADpaths.txt file")
     void areAcceptedPathsGenerated() {
         HashMap<String, String> initialLine = new HashMap<>();
-        String httpMethod = "HEAD";
-        String httpPath = "/test";
-        String httpVersion = "HTTP/1.1";
-        initialLine.put("httpMethod", httpMethod);
-        initialLine.put("httpPath", httpPath);
-        initialLine.put("httpVersion", httpVersion);
+        initialLine.put("httpMethod", "HEAD");
+        initialLine.put("httpPath", "/test");
+        initialLine.put("httpVersion","HTTP/1.1");
         HeadRequestRunner headRequestRunner = new HeadRequestRunner(initialLine);
         expectedGetValidPaths();
 
@@ -52,12 +49,9 @@ class HeadRequestRunnerTest {
     @DisplayName("When a passed path is not allowed then isValidPath should return false")
     void isAllowedPath_NotAllowed() {
         HashMap<String, String> initialLine = new HashMap<>();
-        String httpMethod = "HEAD";
-        String httpPath = "/not_allowed_path";
-        String httpVersion = "HTTP/1.1";
-        initialLine.put("httpMethod", httpMethod);
-        initialLine.put("httpPath", httpPath);
-        initialLine.put("httpVersion", httpVersion);
+        initialLine.put("httpMethod", "HEAD");
+        initialLine.put("httpPath", "/not_allowed_path");
+        initialLine.put("httpVersion", "HTTP/1.1");
         HeadRequestRunner headRequestRunner = new HeadRequestRunner(initialLine);
 
         assertFalse(headRequestRunner.isValidPath());
@@ -67,12 +61,9 @@ class HeadRequestRunnerTest {
     @DisplayName("When a passed path is allowed then isValidPath should return true")
     void isAllowedPath_IsAllowed() {
         HashMap<String, String> initialLine = new HashMap<>();
-        String httpMethod = "HEAD";
-        String httpPath = "/simple_get";
-        String httpVersion = "HTTP/1.1";
-        initialLine.put("httpMethod", httpMethod);
-        initialLine.put("httpPath", httpPath);
-        initialLine.put("httpVersion", httpVersion);
+        initialLine.put("httpMethod", "HEAD");
+        initialLine.put("httpPath", "/simple_get");
+        initialLine.put("httpVersion", "HTTP/1.1");
         HeadRequestRunner headRequestRunner = new HeadRequestRunner(initialLine);
 
         assertTrue(headRequestRunner.isValidPath());
