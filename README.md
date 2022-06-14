@@ -2,6 +2,9 @@
 
 [![CI](https://github.com/ikarabulut/EchoServer/actions/workflows/gradle.yml/badge.svg)](https://github.com/ikarabulut/EchoServer/actions/workflows/gradle.yml)
 
+![Coverage](.github/badges/jacoco.svg)
+
+
 ---
 This project is built in [Java (OpenJDK 18)](https://www.oracle.com/java/technologies/downloads/) using [Gradle](https://docs.gradle.org/current/userguide/userguide.html).
 

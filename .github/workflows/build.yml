@@ -27,3 +27,10 @@ jobs:
           arguments: build
       - name: Test
         run: ./gradlew test
+      - name: Generate JaCoCo Badge
+        uses: cicirello/jacoco-badge-generator@v2
+        with:
+          jacoco-csv-file: app/build/reports/jacoco/test/jacocoTestReport.csv
+          badges-directory: .github/badges
+          generate-branches-badge: true
+          coverage-badge-filename: jacoco.svg
