@@ -2,7 +2,7 @@
 
 [![CI](https://github.com/ikarabulut/EchoServer/actions/workflows/gradle.yml/badge.svg)](https://github.com/ikarabulut/EchoServer/actions/workflows/gradle.yml)
 
-![Coverage](.github/badges/jacoco.svg)
+[![Coverage](.github/badges/jacoco.svg)](https://github.com/ikarabulut/HttpServer/.github/workflows/build.yml)
 
 
 ---
