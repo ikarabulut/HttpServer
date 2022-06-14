@@ -15,7 +15,7 @@ class ServerFactoryTest {
 
     @Test
     @DisplayName("A new ServerSocket should be created with the passed port number")
-    void createServerSocket() {
+    void createServerSocket() throws IOException {
         int port = 5000;
         ServerSocket serverSocket = serverFactory.createServerSocket(port);
 

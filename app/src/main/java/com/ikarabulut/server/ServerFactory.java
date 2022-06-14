@@ -6,21 +6,12 @@ import java.net.Socket;
 
 public class ServerFactory {
 
-    public ServerSocket createServerSocket(int port) {
-        try {
-            return new ServerSocket(port);
-        } catch (IOException ex) {
-            ex.printStackTrace();
-            return null;
-        }
+    public ServerSocket createServerSocket(int port) throws IOException {
+        return new ServerSocket(port);
     }
 
-    public Socket createClientSocket(ServerSocket serverSocket) {
-        try {
+    public Socket createClientSocket(ServerSocket serverSocket) throws IOException {
             return serverSocket.accept();
-        } catch (IOException ex) {
-            ex.printStackTrace();
-            return null;
-        }
     }
+
 }

@@ -24,7 +24,7 @@ public class Server {
         this.serverIO = serverIO;
     }
 
-    public void start() {
+    public void start() throws IOException {
         ServerSocket serverSocket = serverFactory.createServerSocket(port);
 
         int corePoolSize = 5;
@@ -35,11 +35,12 @@ public class Server {
         ThreadPoolExecutor threadPool = new ThreadPoolExecutor(corePoolSize, maximumPoolSize, keepALiveTime, keepAliveTimeunit, linkedBlockingQueue);
 
         while (serverSocket.isBound()) {
-            Socket clientSocket = serverFactory.createClientSocket(serverSocket);
             try {
+                Socket clientSocket = serverFactory.createClientSocket(serverSocket);
                 threadPool.execute(new ClientHandler(clientSocket, serverIO));
             } catch (IOException ex) {
                 ex.printStackTrace();
+                System.err.println("Unable to bind Client Socket, please review stacktrace for more details");
             }
         }
 
