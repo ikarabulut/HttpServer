@@ -10,8 +10,8 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class RequestParserTest {
     private String input = "HEAD /test HTTP/1.1\r\n" +
-            "Content-Type: text/plain\r\n" +
-            "User-Agent: PostmanRuntime/7.29.0\r\n" +
+            "Content-Type" + ":" + " text/plain\r\n" +
+            "User-Agent" + ":" + " PostmanRuntime/7.29.0\r\n" +
             "\r\n";
 
     @Test
@@ -41,8 +41,8 @@ class RequestParserTest {
 
         RequestParser requestParser = new RequestParser(request);
         HashMap<String, String> expectedHeaders = new HashMap<>();
-        expectedHeaders.put("Content-Type:", "text/plain");
-        expectedHeaders.put("User-Agent:", "PostmanRuntime/7.29.0");
+        expectedHeaders.put("Content-Type", "text/plain");
+        expectedHeaders.put("User-Agent", "PostmanRuntime/7.29.0");
 
         HashMap<String, String> returnedHeaders = requestParser.parseHeaders();
 

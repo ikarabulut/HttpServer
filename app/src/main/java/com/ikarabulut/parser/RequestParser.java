@@ -32,7 +32,7 @@ public class RequestParser {
             if (headerString.equals("")) {
                 break;
             }
-            String[] splitHeader = headerString.split(" ", 2);
+            String[] splitHeader = headerString.split(": ", 2);
             String headerKey = splitHeader[0];
             String headerValue = splitHeader[1];
             headers.put(headerKey, headerValue);
