@@ -19,6 +19,7 @@ public class App {
         } catch (IOException ex) {
             ex.printStackTrace();
             System.err.print("Unable to connect server");
+            System.exit(1);
         }
 
     }

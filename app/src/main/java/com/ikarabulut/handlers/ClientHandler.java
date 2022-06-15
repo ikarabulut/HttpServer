@@ -33,7 +33,7 @@ public class ClientHandler implements Runnable {
             Router router = new Router(initialLine);
             String response = router.routeRequest();
 
-            System.out.println(response);
+            System.out.println("Response sent:" + response);
             serverIO.printOutput(writer, response);
         } catch (IOException ex) {
             ex.printStackTrace();
