@@ -18,7 +18,7 @@ public class App {
             server.start();
         } catch (IOException ex) {
             ex.printStackTrace();
-            System.err.print("Unable to connect server, please review stacktrace for more details");
+            System.err.print("Unable to connect server");
         }
 
     }

@@ -6,10 +6,7 @@ import com.ikarabulut.io.ServerIO;
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
-import java.util.concurrent.BlockingQueue;
-import java.util.concurrent.LinkedBlockingQueue;
-import java.util.concurrent.ThreadPoolExecutor;
-import java.util.concurrent.TimeUnit;
+import java.util.concurrent.*;
 
 import static java.util.concurrent.TimeUnit.SECONDS;
 
@@ -32,22 +29,26 @@ public class Server {
         long keepALiveTime = 60;
         TimeUnit keepAliveTimeunit = SECONDS;
         BlockingQueue<Runnable> linkedBlockingQueue = new LinkedBlockingQueue<>();
-        ThreadPoolExecutor threadPool = new ThreadPoolExecutor(corePoolSize, maximumPoolSize, keepALiveTime, keepAliveTimeunit, linkedBlockingQueue);
+        AbstractExecutorService threadPool = new ThreadPoolExecutor(corePoolSize, maximumPoolSize, keepALiveTime, keepAliveTimeunit, linkedBlockingQueue);
 
+        serverIsListening(serverSocket, threadPool);
+
+    }
+
+    public int getPort() {
+        return this.port;
+    }
+
+    private void serverIsListening(ServerSocket serverSocket, AbstractExecutorService threadPool) {
         while (serverSocket.isBound()) {
             try {
                 Socket clientSocket = serverFactory.createClientSocket(serverSocket);
                 threadPool.execute(new ClientHandler(clientSocket, serverIO));
             } catch (IOException ex) {
                 ex.printStackTrace();
-                System.err.println("Unable to bind Client Socket, please review stacktrace for more details");
+                System.err.println("Unable to bind Client Socket");
             }
         }
-
-    }
-
-    public int getPort() {
-        return this.port;
     }
 
 }

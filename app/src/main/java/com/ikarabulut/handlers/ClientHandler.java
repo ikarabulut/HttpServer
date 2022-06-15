@@ -35,7 +35,6 @@ public class ClientHandler implements Runnable {
 
             System.out.println(response);
             serverIO.printOutput(writer, response);
-            closeClientConnection();
         } catch (IOException ex) {
             ex.printStackTrace();
         }
