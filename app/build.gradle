@@ -18,6 +18,8 @@ application {
     mainClass = 'com.ikarabulut.App'
 }
 
+
+
 tasks.named('test') {
     useJUnitPlatform()
     testLogging {
