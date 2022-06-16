@@ -18,8 +18,7 @@ class RequestParserTest {
     @DisplayName("When parsing the initial line, a HashMap containing 'httpMethod', 'httpPath', 'httpVersion' keys and corresponding keys should be generated")
     void parseInitialLine() throws IOException {
         InputStream in = new ByteArrayInputStream(input.getBytes());
-        System.setIn(in);
-        BufferedReader request = new BufferedReader(new InputStreamReader(System.in));
+        BufferedReader request = new BufferedReader(new InputStreamReader(in));
 
         RequestParser requestParser = new RequestParser(request);
         HashMap<String, String> expectedInitialLine = new HashMap<>();
@@ -30,14 +29,15 @@ class RequestParserTest {
         HashMap<String, String> returnedInitialLine = requestParser.parseInitialLine();
 
         assertEquals(expectedInitialLine, returnedInitialLine);
+
+        request.close();
     }
 
     @Test
     @DisplayName("Given a request with 'Content-Type' and 'User-Agent' headers is sent, then a hashmap containing those headers as keys should be generated with corresponding keys")
     void parseHeaders() throws IOException {
         InputStream in = new ByteArrayInputStream(input.getBytes());
-        System.setIn(in);
-        BufferedReader request = new BufferedReader(new InputStreamReader(System.in));
+        BufferedReader request = new BufferedReader(new InputStreamReader(in));
 
         RequestParser requestParser = new RequestParser(request);
         HashMap<String, String> expectedHeaders = new HashMap<>();
@@ -47,6 +47,8 @@ class RequestParserTest {
         HashMap<String, String> returnedHeaders = requestParser.parseHeaders();
 
         assertEquals(expectedHeaders, returnedHeaders);
+
+        request.close();
     }
 
 
