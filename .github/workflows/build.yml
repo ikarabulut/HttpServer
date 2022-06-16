@@ -6,6 +6,11 @@ on:
   pull_request:
     branches: [ main ]
 
+env:
+  COREPOOLSIZE: 5
+  MAXIMUMPOOLSIZE: 5
+  KEEPALIVETIME: 60
+
 permissions:
   contents: read
 
@@ -27,3 +32,5 @@ jobs:
           arguments: build
       - name: Test
         run: ./gradlew test
+      - name: Upload coverage reports to Codecov with GitHub Action
+        uses: codecov/codecov-action@v3

@@ -1,37 +1,27 @@
 package com.ikarabulut;
 
-import java.io.IOException;
-import java.net.ServerSocket;
-import java.net.Socket;
-import java.util.concurrent.LinkedBlockingQueue;
-import java.util.concurrent.ThreadPoolExecutor;
+import com.ikarabulut.io.ServerIO;
+import com.ikarabulut.server.Server;
+import com.ikarabulut.server.SocketFactory;
 
-import static java.util.concurrent.TimeUnit.SECONDS;
+import java.io.IOException;
 
 public class App {
     public static void main(String[] args) {
         int PORT = 5000;
-        LinkedBlockingQueue<Runnable> linkedBlockingQueue = new LinkedBlockingQueue<>();
-        ThreadPoolExecutor threadPool = new ThreadPoolExecutor(3, 3, 60, SECONDS, linkedBlockingQueue);
+        SocketFactory socketFactory = new SocketFactory();
+        ServerIO serverIO = new ServerIO();
 
+        Server server = new Server(PORT, socketFactory, serverIO);
+        System.out.println("You are listening on port: " + PORT);
         try {
-            ServerSocket serverSocket = new ServerSocket(PORT);
-            ServerIO io = new ServerIO();
-            EchoServer echo = new EchoServer(serverSocket);
-            System.out.println("You are running on port: " + PORT);
-            while (true) {
-                Socket clientSocket = echo.createClientSocket();
-                threadPool.execute(new ClientHandler(clientSocket, io));
-                if (threadPool.getActiveCount() == threadPool.getCorePoolSize()) {
-                    System.out.println("You have reached the max core pool size");
-                    System.out.println("You have " + linkedBlockingQueue.size() + " connections in the queue");
-                } else {
-                    System.out.println("You have " + threadPool.getActiveCount() + " active threads");
-                }
-            }
+            server.start();
         } catch (IOException ex) {
-            System.err.print(ex.getMessage());
+            ex.printStackTrace();
+            System.err.print("Unable to connect server");
+            System.exit(1);
         }
+
     }
 
 }

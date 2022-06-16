@@ -1,9 +1,6 @@
-package com.ikarabulut;
+package com.ikarabulut.io;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.PrintWriter;
+import java.io.*;
 import java.net.Socket;
 
 public class ServerIO {
@@ -16,11 +13,15 @@ public class ServerIO {
     }
 
     public PrintWriter generateClientSocketWriter(Socket clientSocket) throws IOException {
-        return new PrintWriter(clientSocket.getOutputStream(), true);
+        OutputStream clientOutputStream = clientSocket.getOutputStream();
+        boolean useAutoFlush = true;
+        return new PrintWriter(clientOutputStream, useAutoFlush);
     }
 
     public BufferedReader generateClientSocketReader(Socket clientSocket) throws IOException {
-        return new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
+        InputStream clientInputStream = clientSocket.getInputStream();
+        InputStreamReader clientInputStreamReader = new InputStreamReader(clientInputStream);
+        return new BufferedReader(clientInputStreamReader);
     }
 
 }
