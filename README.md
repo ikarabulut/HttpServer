@@ -1,6 +1,6 @@
 # HTTP Server
 
-[![CI](https://github.com/ikarabulut/EchoServer/actions/workflows/gradle.yml/badge.svg)](https://github.com/ikarabulut/EchoServer/actions/workflows/gradle.yml)
+[![CI](https://github.com/ikarabulut/EchoServer/actions/workflows/build.yml/badge.svg)](https://github.com/ikarabulut/EchoServer/actions/workflows/gradle.yml)
 [![codecov](https://codecov.io/gh/ikarabulut/HttpServer/branch/codecov-badge/graph/badge.svg?token=V2G4O5CC1W)](https://codecov.io/gh/ikarabulut/HttpServer)
 ---
 This project is built in [Java (OpenJDK 18)](https://www.oracle.com/java/technologies/downloads/) using [Gradle](https://docs.gradle.org/current/userguide/userguide.html).
