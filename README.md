@@ -14,45 +14,50 @@ This project is built in [Java (OpenJDK 18)](https://www.oracle.com/java/technol
   - After install you can run `java --version` to confirm proper installation
 - **Gradle**
   - Follow these [Gradle doc instructions](https://gradle.org/install/)
+  
+- **[direnv](https://direnv.net/)**
+  - Used for local environment variables
+  - To install using homebrew run `brew install direnv` in your terminal
+  - Follow these instructions to hook direnv to your shell https://direnv.net/docs/hook.html
+    - For ZSH add the following line to your .zshrc file
+      - `eval "$(direnv hook zsh)"`
+
 
 ## Functional Requirements
 
 ---
-A user should be able to interact with the HTTP server as follows:
+**A user should be able to interact with the HTTP server as follows:**
 
-When a client sends a properly formatted request to the server, the server sends an appropriate response back to the client.
-A client can send different HTTP requests to the server and get the appropriate response back each time.
-Different clients can send messages to server and get back their proper responses.
-The server should be able to handle 200, 300, and 400-level responses. Not every response code needs to be complete, but there should be a few representative response codes implemented for each level.
+- When a client sends a properly formatted request to the server, the server sends an appropriate response back to the client.
+- A client can send different HTTP requests to the server and get the appropriate response back each time.
+- Different clients can send messages to server and get back their proper responses.
+- The server should be able to handle 200, 300, and 400-level responses. Not every response code needs to be complete, but there should be a few representative response codes implemented for each level.
 
 ## Current Features
 
 ---
-<ul>
-<li>🟢 Simple HEAD request
-</li>
-<li>🔴 Simple GET request
-</li>
-<li>🔴 Simple OPTIONS request
-</li>
-<li>🔴 Simple POST request
-</li>
-<li>🔴 Redirect feature
-</li>
-<li>🔴 Method not found feature
-</li>
-<li>🔴 Page not found feature
-</li>
-</ul>
+🟢 Simple HEAD request
 
+🔴 Simple GET request
+
+🔴 Simple OPTIONS request
+
+🔴 Simple POST request
+
+🔴 Redirect feature
+
+🔴 Method not found feature
+
+🔴 Page not found feature
 
 ## Installation
 
 ---
-1. Clone the repo to your machine, and `cd` into the directory
+1. Clone the repo to your machine, and `cd` into the directory, run the `direnv allow` to load the local env variables using direnv
 ```
 git clone https://github.com/ikarabulut/HttpServer.git
 cd HttpServer
+direnv allow
 ```
 2. Build the App
 ```

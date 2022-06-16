@@ -6,6 +6,7 @@ import com.ikarabulut.io.ServerIO;
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.nio.file.FileSystemException;
 import java.util.concurrent.*;
 
 import static java.util.concurrent.TimeUnit.SECONDS;
@@ -14,20 +15,21 @@ public class Server {
     private int port;
     private ServerFactory serverFactory;
     private ServerIO serverIO;
+    private int corePoolSize;
+    int maximumPoolSize;
+    long keepALiveTime;
+    TimeUnit keepAliveTimeunit = SECONDS;
 
     public Server(int port, ServerFactory serverFactory, ServerIO serverIO) {
         this.port = port;
         this.serverFactory = serverFactory;
         this.serverIO = serverIO;
+        loadEnvVariables();
     }
 
     public void start() throws IOException {
         ServerSocket serverSocket = serverFactory.createServerSocket(port);
 
-        int corePoolSize = 5;
-        int maximumPoolSize = 5;
-        long keepALiveTime = 60;
-        TimeUnit keepAliveTimeunit = SECONDS;
         BlockingQueue<Runnable> linkedBlockingQueue = new LinkedBlockingQueue<>();
         AbstractExecutorService threadPool = new ThreadPoolExecutor(corePoolSize, maximumPoolSize, keepALiveTime, keepAliveTimeunit, linkedBlockingQueue);
 
@@ -49,6 +51,12 @@ public class Server {
                 System.err.println("Unable to bind Client Socket");
             }
         }
+    }
+
+    private void loadEnvVariables() {
+        corePoolSize = Integer.parseInt(System.getenv("COREPOOLSIZE"));
+        maximumPoolSize = Integer.parseInt(System.getenv("MAXIMUMPOOLSIZE"));
+        keepALiveTime = Long.parseLong(System.getenv("KEEPALIVETIME"));
     }
 
 }
