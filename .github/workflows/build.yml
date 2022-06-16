@@ -6,6 +6,11 @@ on:
   pull_request:
     branches: [ main ]
 
+env:
+  COREPOOLSIZE: 5
+  MAXIMUMPOOLSIZE: 5
+  KEEPALIVETIME: 60
+
 permissions:
   contents: read
 
@@ -21,14 +26,11 @@ jobs:
         with:
           java-version: '17'
           distribution: 'adopt'
-
       - name: Build with Gradle
         uses: gradle/gradle-build-action@0d13054264b0bb894ded474f08ebb30921341cee
         with:
           arguments: build
-
       - name: Test
         run: ./gradlew test
-
       - name: Upload coverage reports to Codecov with GitHub Action
         uses: codecov/codecov-action@v3

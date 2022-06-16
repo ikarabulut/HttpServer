@@ -24,6 +24,7 @@ public class Server {
         this.port = port;
         this.serverFactory = serverFactory;
         this.serverIO = serverIO;
+
         loadEnvVariables();
     }
 
