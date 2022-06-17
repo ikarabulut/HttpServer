@@ -14,7 +14,7 @@ class ClientInputTest {
             "\r\n";
 
     @Test
-    @DisplayName("buildRequestString() should return a string matching the char ar    ray from the BufferedReader")
+    @DisplayName("buildRequestString() should return a string matching the char array from the BufferedReader")
     void buildRequestString() throws IOException {
         InputStream in = new ByteArrayInputStream(input.getBytes());
         ClientInput clientInput = new ClientInput(in);
