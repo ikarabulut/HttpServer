@@ -33,7 +33,6 @@ public class Server {
         AbstractExecutorService threadPool = new ThreadPoolExecutor(corePoolSize, maximumPoolSize, keepALiveTime, keepAliveTimeunit, linkedBlockingQueue);
 
         serverIsListening(serverSocket, threadPool);
-
     }
 
     public int getPort() {

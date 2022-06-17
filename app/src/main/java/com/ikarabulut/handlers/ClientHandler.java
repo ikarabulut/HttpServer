@@ -1,12 +1,12 @@
 package com.ikarabulut.handlers;
 
+import com.ikarabulut.io.ClientReader;
 import com.ikarabulut.server.http.Router;
 import com.ikarabulut.io.ServerIO;
 import com.ikarabulut.parser.RequestParser;
 
 import java.io.*;
 import java.net.Socket;
-import java.util.HashMap;
 import java.util.Map;
 
 public class ClientHandler implements Runnable {
@@ -23,22 +23,25 @@ public class ClientHandler implements Runnable {
     }
 
     public void run() {
-        BufferedReader request = reader;
-        RequestParser requestParser = new RequestParser(request);
-        Map<String, String> initialLine = requestParser.parseInitialLine();
-        Map<String, String> headers = requestParser.parseHeaders();
+        try {
+            ClientReader clientReader = new ClientReader(clientSocket.getInputStream());
+            RequestParser requestParser = new RequestParser(clientReader);
+            Map<String, String> initialLine = requestParser.parseInitialLine();
+            Map<String, String> headers = requestParser.parseHeaders();
 
-        Router router = new Router(initialLine);
-        String response = router.routeRequest();
+            Router router = new Router(initialLine);
+            String response = router.routeRequest();
 
-        System.out.println("Response sent:" + response);
-        serverIO.printOutput(writer, response);
+            serverIO.printOutput(writer, response);
+            closeClientConnection();
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+
     }
 
     public void closeClientConnection() throws IOException {
         clientSocket.close();
-        writer.close();
-        reader.close();
     }
 
 }

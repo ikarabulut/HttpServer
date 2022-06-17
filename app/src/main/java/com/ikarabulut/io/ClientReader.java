@@ -4,16 +4,25 @@ import java.io.*;
 
 public class ClientReader {
     Reader requestReader;
+    int availableBytes;
 
     public ClientReader(InputStream requestInputStream) throws IOException {
         requestReader = new InputStreamReader(requestInputStream);
+        availableBytes = requestInputStream.available();
     }
 
     public String stringifyInput() throws IOException {
-        requestReader = new BufferedReader(requestReader);
+        requestReader = new BufferedReader(requestReader, availableBytes);
         StringBuilder sb = new StringBuilder();
         int c;
-        while ((c = requestReader.read()) != -1) sb.append((char) c);
+        int bytesRead = 0;
+        while (bytesRead < availableBytes) {
+            c = requestReader.read();
+            if (c == -1) break;
+            sb.append((char) c);
+            bytesRead++;
+        }
+        System.out.println(sb);
         return sb.toString();
     }
 }
