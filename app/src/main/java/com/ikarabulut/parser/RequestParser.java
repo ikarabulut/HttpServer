@@ -19,13 +19,14 @@ public class RequestParser {
 
     public RequestParser(ClientReader clientReader) {
         this.clientReader = clientReader;
+        //TODO: add this.requestString so the reader is only read once and then saved as an object
     }
 
     public Map<String, String> parseInitialLine() {
         Map<String, String> initialLineMap = new HashMap<>();
         try {
             String requestString = clientReader.stringifyInput();
-            String[] splitInitialLine = requestString.split("\r?\n|\r");
+            String[] splitInitialLine = requestString.split("\r?\n");
             String[] initialLineArray = splitInitialLine[0].split(" ", 3);
 
             initialLineMap.put("httpMethod", initialLineArray[0]);
@@ -40,20 +41,25 @@ public class RequestParser {
         return initialLineMap;
     }
 
-    public HashMap<String, String> parseHeaders() throws IOException {
-        String throwAwayFirstLine = request.readLine();
-        String headerString;
-        headers = new HashMap<>();
-        while (true) {
-            headerString = request.readLine();
-            if (headerString.equals("")) {
-                break;
+    public Map<String, String> parseHeaders() {
+        Map<String, String> headers = new HashMap<>();
+        try {
+            String requestString = clientReader.stringifyInput();
+            String[] splitRequestString = requestString.split("\r?\n");
+
+            for (int i = 1; i < splitRequestString.length; i++) {
+                if (splitRequestString[i].equals("")) {
+                    break;
+                } else {
+                    String[] line = splitRequestString[i].split(": ", 2);
+                    headers.put(line[0], line[1]);
+                }
             }
-            String[] splitHeader = headerString.split(": ", 2);
-            String headerKey = splitHeader[0];
-            String headerValue = splitHeader[1];
-            headers.put(headerKey, headerValue);
+            return headers;
+        } catch (IOException ex) {
+            System.err.print("Unable to parse reader into string");
         }
+        headers.put("error", "unable to parse");
         return headers;
     }
 

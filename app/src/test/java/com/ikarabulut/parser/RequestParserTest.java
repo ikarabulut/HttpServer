@@ -13,7 +13,8 @@ import static org.junit.jupiter.api.Assertions.*;
 class RequestParserTest {
     private String input = "HEAD /test HTTP/1.1\r\n" +
             "Content-Type" + ":" + " text/plain\r\n" +
-            "User-Agent" + ":" + " PostmanRuntime/7.29.0\r\n\r\n";
+            "User-Agent" + ":" + " PostmanRuntime/7.29.0\r\n\r\n" +
+            "Hello World\r\n";
 
     @Test
     @DisplayName("When parsing the initial line, a HashMap containing 'httpMethod', 'httpPath', 'httpVersion' keys and corresponding keys should be generated")
@@ -36,18 +37,16 @@ class RequestParserTest {
     @DisplayName("Given a request with 'Content-Type' and 'User-Agent' headers is sent, then a hashmap containing those headers as keys should be generated with corresponding keys")
     void parseHeaders() throws IOException {
         InputStream in = new ByteArrayInputStream(input.getBytes());
-        BufferedReader request = new BufferedReader(new InputStreamReader(in));
+        ClientReader clientReader = new ClientReader(in);
+        RequestParser requestParser = new RequestParser(clientReader);
 
-        RequestParser requestParser = new RequestParser(request);
         HashMap<String, String> expectedHeaders = new HashMap<>();
         expectedHeaders.put("Content-Type", "text/plain");
         expectedHeaders.put("User-Agent", "PostmanRuntime/7.29.0");
 
-        HashMap<String, String> returnedHeaders = requestParser.parseHeaders();
+        Map<String, String> returnedHeaders = requestParser.parseHeaders();
 
         assertEquals(expectedHeaders, returnedHeaders);
-
-        request.close();
     }
 
 

@@ -24,19 +24,15 @@ public class ClientHandler implements Runnable {
 
     public void run() {
         BufferedReader request = reader;
-        try {
-            RequestParser requestParser = new RequestParser(request);
-            Map<String, String> initialLine = requestParser.parseInitialLine();
-            HashMap<String, String> headers = requestParser.parseHeaders();
+        RequestParser requestParser = new RequestParser(request);
+        Map<String, String> initialLine = requestParser.parseInitialLine();
+        Map<String, String> headers = requestParser.parseHeaders();
 
-            Router router = new Router(initialLine);
-            String response = router.routeRequest();
+        Router router = new Router(initialLine);
+        String response = router.routeRequest();
 
-            System.out.println("Response sent:" + response);
-            serverIO.printOutput(writer, response);
-        } catch (IOException ex) {
-            ex.printStackTrace();
-        }
+        System.out.println("Response sent:" + response);
+        serverIO.printOutput(writer, response);
     }
 
     public void closeClientConnection() throws IOException {
