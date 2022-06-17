@@ -3,10 +3,10 @@ package com.ikarabulut.io;
 import java.io.*;
 
 //TODO:: Rename to ClientReader
-public class ClientInput {
+public class ClientReader {
     Reader requestReader;
 
-    public ClientInput(InputStream requestInputStream) throws IOException {
+    public ClientReader(InputStream requestInputStream) throws IOException {
         requestReader = new InputStreamReader(requestInputStream);
     }
 

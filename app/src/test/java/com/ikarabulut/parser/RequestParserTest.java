@@ -1,6 +1,6 @@
 package com.ikarabulut.parser;
 
-import com.ikarabulut.io.ClientInput;
+import com.ikarabulut.io.ClientReader;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -19,8 +19,8 @@ class RequestParserTest {
     @DisplayName("When parsing the initial line, a HashMap containing 'httpMethod', 'httpPath', 'httpVersion' keys and corresponding keys should be generated")
     void parseInitialLine() throws IOException {
         InputStream in = new ByteArrayInputStream(input.getBytes());
-        ClientInput clientInput = new ClientInput(in);
-        RequestParser requestParser = new RequestParser(clientInput);
+        ClientReader clientReader = new ClientReader(in);
+        RequestParser requestParser = new RequestParser(clientReader);
 
         Map<String, String> expectedInitialLine = new HashMap<>();
         expectedInitialLine.put("httpMethod", "HEAD");
