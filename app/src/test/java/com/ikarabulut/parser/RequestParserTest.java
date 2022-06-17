@@ -1,36 +1,35 @@
 package com.ikarabulut.parser;
 
+import com.ikarabulut.io.ClientInput;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.io.*;
 import java.util.HashMap;
+import java.util.Map;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 class RequestParserTest {
     private String input = "HEAD /test HTTP/1.1\r\n" +
             "Content-Type" + ":" + " text/plain\r\n" +
-            "User-Agent" + ":" + " PostmanRuntime/7.29.0\r\n" +
-            "\r\n";
+            "User-Agent" + ":" + " PostmanRuntime/7.29.0\r\n\r\n";
 
     @Test
     @DisplayName("When parsing the initial line, a HashMap containing 'httpMethod', 'httpPath', 'httpVersion' keys and corresponding keys should be generated")
     void parseInitialLine() throws IOException {
         InputStream in = new ByteArrayInputStream(input.getBytes());
-        BufferedReader request = new BufferedReader(new InputStreamReader(in));
+        ClientInput clientInput = new ClientInput(in);
+        RequestParser requestParser = new RequestParser(clientInput);
 
-        RequestParser requestParser = new RequestParser(request);
-        HashMap<String, String> expectedInitialLine = new HashMap<>();
+        Map<String, String> expectedInitialLine = new HashMap<>();
         expectedInitialLine.put("httpMethod", "HEAD");
         expectedInitialLine.put("httpPath", "/test");
         expectedInitialLine.put("httpVersion", "HTTP/1.1");
 
-        HashMap<String, String> returnedInitialLine = requestParser.parseInitialLine();
+        Map<String, String> returnedInitialLine = requestParser.parseInitialLine();
 
         assertEquals(expectedInitialLine, returnedInitialLine);
-
-        request.close();
     }
 
     @Test

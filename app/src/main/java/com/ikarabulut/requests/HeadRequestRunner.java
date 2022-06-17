@@ -8,7 +8,7 @@ public class HeadRequestRunner {
     List<String> acceptedPaths;
     String httpPath;
     String httpVersion;
-    public HeadRequestRunner(HashMap<String, String> initialLine) {
+    public HeadRequestRunner(Map<String, String> initialLine) {
         this.httpPath = initialLine.get("httpPath");
         this.httpVersion = initialLine.get("httpVersion");
         this.acceptedPaths = new ArrayList<>( Arrays.asList("/simple_get", "/head_request"));

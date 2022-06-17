@@ -3,11 +3,12 @@ package com.ikarabulut.server.http;
 import com.ikarabulut.requests.HeadRequestRunner;
 
 import java.util.HashMap;
+import java.util.Map;
 
 public class Router {
-    private HashMap<String, String> initialLine;
+    private Map<String, String> initialLine;
 
-    public Router(HashMap<String, String> initialLine) {
+    public Router(Map<String, String> initialLine) {
         this.initialLine = initialLine;
     }
 

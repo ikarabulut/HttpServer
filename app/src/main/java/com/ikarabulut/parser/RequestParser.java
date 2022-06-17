@@ -1,10 +1,14 @@
 package com.ikarabulut.parser;
 
+import com.ikarabulut.io.ClientInput;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.Map;
 
 public class RequestParser {
+    private ClientInput clientInput;
     private BufferedReader request;
     private HashMap<String, String> initialLine;
     private HashMap<String, String> headers;
@@ -13,14 +17,27 @@ public class RequestParser {
         this.request = request;
     }
 
-    public HashMap<String, String> parseInitialLine() throws IOException {
-        String initialLineString = request.readLine();
-        initialLine = new HashMap<>();
-        String[] splitRequestLine = initialLineString.split(" ", 3);
-        initialLine.put("httpMethod", splitRequestLine[0]);
-        initialLine.put("httpPath", splitRequestLine[1]);
-        initialLine.put("httpVersion", splitRequestLine[2]);
-        return initialLine;
+    public RequestParser(ClientInput clientInput) {
+        this.clientInput = clientInput;
+    }
+
+    public Map<String, String> parseInitialLine() {
+        Map<String, String> initialLineMap = new HashMap<>();
+        try {
+            String requestString = clientInput.stringifyInput();
+            String[] splitInitialLine = requestString.split("\r?\n|\r");
+            String[] initialLineArray = splitInitialLine[0].split(" ", 3);
+
+            initialLineMap.put("httpMethod", initialLineArray[0]);
+            initialLineMap.put("httpPath", initialLineArray[1]);
+            initialLineMap.put("httpVersion", initialLineArray[2]);
+            
+            return initialLineMap;
+        } catch (IOException ex) {
+            System.err.print("Unable to parse reader into string");
+        }
+        initialLineMap.put("error", "unable to parse");
+        return initialLineMap;
     }
 
     public HashMap<String, String> parseHeaders() throws IOException {

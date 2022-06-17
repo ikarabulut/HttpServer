@@ -4,11 +4,10 @@ import com.ikarabulut.server.http.Router;
 import com.ikarabulut.io.ServerIO;
 import com.ikarabulut.parser.RequestParser;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.PrintWriter;
+import java.io.*;
 import java.net.Socket;
 import java.util.HashMap;
+import java.util.Map;
 
 public class ClientHandler implements Runnable {
     private ServerIO serverIO;
@@ -27,7 +26,7 @@ public class ClientHandler implements Runnable {
         BufferedReader request = reader;
         try {
             RequestParser requestParser = new RequestParser(request);
-            HashMap<String, String> initialLine = requestParser.parseInitialLine();
+            Map<String, String> initialLine = requestParser.parseInitialLine();
             HashMap<String, String> headers = requestParser.parseHeaders();
 
             Router router = new Router(initialLine);

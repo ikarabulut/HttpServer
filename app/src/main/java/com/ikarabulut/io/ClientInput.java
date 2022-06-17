@@ -2,6 +2,7 @@ package com.ikarabulut.io;
 
 import java.io.*;
 
+//TODO:: Rename to ClientReader
 public class ClientInput {
     Reader requestReader;
 
