@@ -2,7 +2,6 @@ package com.ikarabulut.server.http;
 
 import com.ikarabulut.requests.HeadRequestRunner;
 
-import java.util.HashMap;
 import java.util.Map;
 
 public class Router {

@@ -2,7 +2,6 @@ package com.ikarabulut.parser;
 
 import com.ikarabulut.io.ClientReader;
 
-import java.io.BufferedReader;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
@@ -10,8 +9,6 @@ import java.util.Map;
 public class RequestParser {
     private ClientReader clientReader;
     private String requestString;
-    private HashMap<String, String> initialLine;
-    private HashMap<String, String> headers;
 
     public RequestParser(ClientReader clientReader) {
         this.clientReader = clientReader;
@@ -50,9 +47,4 @@ public class RequestParser {
         return headers;
     }
 
-    public HashMap<String, String> getInitialLine() {
-        return initialLine;
-    }
-
-    public HashMap<String, String> getHeaders() { return headers; }
 }

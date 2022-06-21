@@ -23,8 +23,5 @@ public class HeadRequestRunner {
         return acceptedPaths.contains(httpPath);
     }
 
-    public List<String> getAcceptedPaths() {
-        return acceptedPaths;
-    }
 
 }
