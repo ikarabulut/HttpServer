@@ -1,7 +1,7 @@
 package com.ikarabulut.handlers;
 
 import com.ikarabulut.io.ClientReader;
-import com.ikarabulut.server.http.Router;
+import com.ikarabulut.server.Router;
 import com.ikarabulut.io.ServerIO;
 import com.ikarabulut.parser.RequestParser;
 

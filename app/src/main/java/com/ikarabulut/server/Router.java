@@ -1,4 +1,4 @@
-package com.ikarabulut.server.http;
+package com.ikarabulut.server;
 
 import com.ikarabulut.requests.HeadRequestRunner;
 
