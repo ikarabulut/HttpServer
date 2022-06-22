@@ -2,7 +2,7 @@ package com.ikarabulut.response;
 
 import java.util.Date;
 
-public class HeadResponseHandler {
+public class HeadResponse {
     private String CRLF = "\r\n";
     private String httpVersion;
     private boolean isValidPath;
@@ -10,7 +10,7 @@ public class HeadResponseHandler {
     private String responseHeaderLines;
 
 
-    public HeadResponseHandler(boolean isValidPath, String httpVersion) {
+    public HeadResponse(boolean isValidPath, String httpVersion) {
         this.httpVersion = httpVersion;
         this.isValidPath = isValidPath;
 

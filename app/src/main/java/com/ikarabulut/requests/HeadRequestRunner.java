@@ -1,6 +1,6 @@
 package com.ikarabulut.requests;
 
-import com.ikarabulut.response.HeadResponseHandler;
+import com.ikarabulut.response.HeadResponse;
 
 import java.util.*;
 
@@ -15,7 +15,7 @@ public class HeadRequestRunner {
     }
 
     public String processResponse(boolean isValidPath) {
-        HeadResponseHandler responseHandler = new HeadResponseHandler(isValidPath, httpVersion);
+        HeadResponse responseHandler = new HeadResponse(isValidPath, httpVersion);
         return responseHandler.stringifyHeadResponse();
     }
 
