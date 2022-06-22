@@ -7,7 +7,7 @@ public enum StatusCode {
 
     StatusCode(String statusCode) {
         this.code = statusCode;
-;    }
+    }
 
     public String getStatusNumber() {
         return code;

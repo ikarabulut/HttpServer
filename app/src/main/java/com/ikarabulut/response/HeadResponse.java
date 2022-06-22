@@ -1,6 +1,5 @@
 package com.ikarabulut.response;
 
-import java.util.Date;
 import java.util.Map;
 
 public class HeadResponse implements Response {

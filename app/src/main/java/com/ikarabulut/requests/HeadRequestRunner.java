@@ -10,9 +10,10 @@ public class HeadRequestRunner {
     List<String> acceptedPaths;
     Map<String, String> initialLine;
     Map<String, String> headers;
+
     public HeadRequestRunner(Map<String, String> initialLine) {
         this.initialLine = initialLine;
-        this.acceptedPaths = new ArrayList<>( Arrays.asList("/simple_get", "/head_request"));
+        this.acceptedPaths = new ArrayList<>(Arrays.asList("/simple_get", "/head_request"));
         this.headers = new HashMap<>() {
             {
                 put("Date", new Date().toString());

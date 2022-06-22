@@ -13,6 +13,7 @@ public class ClientWriter {
         this.socketWriter = new PrintWriter(outputStream, useAutoFlush);
 
     }
+
     public void printOutput(String input) {
         socketWriter.print(input);
     }

@@ -20,7 +20,7 @@ public class GetResponse implements Response {
         this.version = version;
         this.statusCode = statusCode;
         this.statusNumber = statusNumber;
-        this.headers = headers;;
+        this.headers = headers;
         this.body = body;
     }
 
