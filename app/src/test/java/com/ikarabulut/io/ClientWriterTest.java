@@ -13,7 +13,7 @@ class ClientWriterTest {
     void writeOutput_WithHello() {
         ByteArrayOutputStream out = new ByteArrayOutputStream();
         ClientWriter clientWriter = new ClientWriter(out);
-        String input = "Hello";
+        String input = "Hello\n";
 
         clientWriter.printOutput(input);
 

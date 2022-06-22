@@ -27,9 +27,8 @@ class GetResponseTest {
         String expectedResponse = version + " " + statusNumber + " " + statusCode + "\r\n" +
                 "Date: " + headers.get("Date") + "\r\n" +
                 "Content-Language: " + headers.get("Content-Language") + "\r\n" +
-                "\r\n" + "\r\n" +
-                expectedBody +
-                "\r\n";
+                "\r\n" +
+                expectedBody;
         GetResponse getResponse = new GetResponse(version, statusCode, statusNumber, headers, expectedBody);
         String stringifiedResponse = getResponse.stringifyResponse();
 
@@ -39,10 +38,10 @@ class GetResponseTest {
     @Test
     @DisplayName("A GetResponse without a body should return a string without a body when stringified")
     void stringifyResponse_WithoutBody() {
+        String emptyBody = " ";
         String expectedResponse = version + " " + statusNumber + " " + statusCode + "\r\n" +
                 "Date: " + headers.get("Date") + "\r\n" +
-                "Content-Language: " + headers.get("Content-Language") + "\r\n" +
-                "\r\n" + "\r\n";
+                "Content-Language: " + headers.get("Content-Language") + "\r\n" + "\r\n";
         GetResponse getResponse = new GetResponse(version, statusCode, statusNumber, headers);
 
         String stringifiedResponse = getResponse.stringifyResponse();
