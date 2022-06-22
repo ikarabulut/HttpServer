@@ -1,7 +1,5 @@
 package com.ikarabulut.response;
 
-import com.ikarabulut.response.status.StatusCode;
-
 import java.util.Date;
 
 public class HeadResponseHandler {

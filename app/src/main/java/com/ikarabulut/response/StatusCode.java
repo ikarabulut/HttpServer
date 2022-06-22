@@ -1,4 +1,4 @@
-package com.ikarabulut.response.status;
+package com.ikarabulut.response;
 
 public enum StatusCode {
     OK("200");
