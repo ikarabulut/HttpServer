@@ -22,7 +22,7 @@ public class ClientReader {
             sb.append((char) c);
             bytesRead++;
         }
-        System.out.println(sb);
+        System.out.println("Incoming Request: " + "\r\n" + sb);
         return sb.toString();
     }
 }

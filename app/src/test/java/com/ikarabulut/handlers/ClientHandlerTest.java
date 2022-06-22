@@ -1,9 +1,9 @@
 package com.ikarabulut.handlers;
 
-import com.ikarabulut.handlers.ClientHandler;
-import com.ikarabulut.io.ServerIO;
+import com.ikarabulut.io.ClientWriter;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.mockito.Mockito;
 
 import java.io.*;
 import java.net.Socket;
@@ -12,38 +12,59 @@ import static org.mockito.Mockito.*;
 
 class ClientHandlerTest {
     @Test
-    @DisplayName("A ClientHandler should generate a writer based on the clientSocket that was passed through the constructor")
-    void ClientHandlerConstructor_GeneratesWriter() throws IOException {
-        ServerIO io = mock(ServerIO.class);
+    @DisplayName("When a client handler is created, it should create an input stream and output stream based on the client socket")
+    void createClientSocket_CheckInputStream() throws IOException {
         Socket clientSocket = mock(Socket.class);
+        ClientHandler clientHandler = new ClientHandler(clientSocket);
 
-        ClientHandler clientHandler = new ClientHandler(clientSocket, io);
-
-        verify(io).generateClientSocketWriter(clientSocket);
+        verify(clientSocket).getOutputStream();
+        verify(clientSocket).getInputStream();
     }
 
     @Test
-    @DisplayName("A ClientHandler should generate a reader based on the clientSocket that was passed through the constructor")
-    void ClientHandlerConstructor_GeneratesReader() throws IOException {
-        ServerIO io = mock(ServerIO.class);
+    @DisplayName("When closeClientConnection is called, then the ClientWriters close method should be called")
+    void closeClientConnection_CheckClientWriterClose() throws IOException {
         Socket clientSocket = mock(Socket.class);
+        InputStream inputStream = mock(InputStream.class);
+        when(clientSocket.getInputStream()).thenReturn(inputStream);
+        ClientWriter writer = mock(ClientWriter.class);
+        ClientWriter writerSpy = Mockito.spy(writer);
+        ClientHandler clientHandler = new ClientHandler(clientSocket);
 
-        ClientHandler clientHandler = new ClientHandler(clientSocket, io);
+        clientHandler.closeClientConnection(writerSpy);
 
-        verify(io).generateClientSocketReader(clientSocket);
+        verify(writerSpy).closeWriter();
     }
 
     @Test
-    @DisplayName("When closeClientConnection() is called, then the clientSocket should have close() invoked on it")
-    void closeClientConnection() throws IOException {
-        ServerIO io = mock(ServerIO.class);
+    @DisplayName("When closeClientConnection is called, then the Socket close method should be called")
+    void closeClientConnection_CheckSocketCloses() throws IOException {
         Socket clientSocket = mock(Socket.class);
+        InputStream inputStream = mock(InputStream.class);
+        when(clientSocket.getInputStream()).thenReturn(inputStream);
+        ClientWriter writer = mock(ClientWriter.class);
+        ClientWriter writerSpy = Mockito.spy(writer);
+        ClientHandler clientHandler = new ClientHandler(clientSocket);
 
-        ClientHandler clientHandler = new ClientHandler(clientSocket, io);
-
-        clientHandler.closeClientConnection();
+        clientHandler.closeClientConnection(writerSpy);
 
         verify(clientSocket).close();
     }
+
+    @Test
+    @DisplayName("When closeClientConnection is called, then the InputStreams close method should be called")
+    void closeClientConnection_CheckReaderCloses() throws IOException {
+        Socket clientSocket = mock(Socket.class);
+        InputStream inputStream = mock(InputStream.class);
+        when(clientSocket.getInputStream()).thenReturn(inputStream);
+        ClientWriter writer = mock(ClientWriter.class);
+        ClientWriter writerSpy = Mockito.spy(writer);
+        ClientHandler clientHandler = new ClientHandler(clientSocket);
+
+        clientHandler.closeClientConnection(writerSpy);
+
+        verify(inputStream).close();
+    }
+
 
 }

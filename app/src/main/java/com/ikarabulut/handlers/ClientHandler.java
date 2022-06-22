@@ -3,7 +3,7 @@ package com.ikarabulut.handlers;
 import com.ikarabulut.io.ClientReader;
 import com.ikarabulut.response.Response;
 import com.ikarabulut.server.Router;
-import com.ikarabulut.io.ServerIO;
+import com.ikarabulut.io.ClientWriter;
 import com.ikarabulut.parser.RequestParser;
 
 import java.io.*;
@@ -11,18 +11,14 @@ import java.net.Socket;
 import java.util.Map;
 
 public class ClientHandler implements Runnable {
-    private ServerIO serverIO;
-    private PrintWriter writer;
-    private BufferedReader reader;
     private Socket clientSocket;
     private InputStream inputStream;
+    private OutputStream outputStream;
 
-    public ClientHandler(Socket clientSocket, ServerIO serverIO) throws IOException {
+    public ClientHandler(Socket clientSocket) throws IOException {
         this.clientSocket = clientSocket;
-        this.serverIO = serverIO;
         this.inputStream = clientSocket.getInputStream();
-        writer = serverIO.generateClientSocketWriter(clientSocket);
-        reader = serverIO.generateClientSocketReader(clientSocket);
+        this.outputStream = clientSocket.getOutputStream();
     }
 
     public void run() {
@@ -33,20 +29,25 @@ public class ClientHandler implements Runnable {
 
             Router router = new Router(initialLine);
             Response response = router.routeRequest();
+
+            ClientWriter clientWriter = new ClientWriter(outputStream);
+
             if (response == null) {
-                serverIO.printOutput(writer, "server error");
+                clientWriter.printOutput("server error");
+                System.out.println("Response Sent: " + "\r\n" + "server error");
             } else {
-                serverIO.printOutput(writer, response.stringifyResponse());
+                clientWriter.printOutput(response.stringifyResponse());
+                System.out.println("Response Sent: " + "\r\n" + response.stringifyResponse());
             }
-            closeClientConnection();
+            closeClientConnection(clientWriter);
         } catch (IOException ex) {
             ex.printStackTrace();
         }
 
     }
 
-    public void closeClientConnection() throws IOException {
-        writer.close();
+    public void closeClientConnection(ClientWriter writer) throws IOException {
+        writer.closeWriter();
         inputStream.close();
         clientSocket.close();
     }

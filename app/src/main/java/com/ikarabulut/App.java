@@ -1,6 +1,5 @@
 package com.ikarabulut;
 
-import com.ikarabulut.io.ServerIO;
 import com.ikarabulut.server.Server;
 import com.ikarabulut.server.SocketFactory;
 
@@ -10,9 +9,8 @@ public class App {
     public static void main(String[] args) {
         int PORT = 5000;
         SocketFactory socketFactory = new SocketFactory();
-        ServerIO serverIO = new ServerIO();
 
-        Server server = new Server(PORT, socketFactory, serverIO);
+        Server server = new Server(PORT, socketFactory);
         System.out.println("You are listening on port: " + PORT);
         try {
             server.start();
