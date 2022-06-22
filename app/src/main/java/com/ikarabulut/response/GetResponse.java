@@ -22,6 +22,14 @@ public class GetResponse implements Response {
     }
 
     @Override
+    public String stringifyResponse() {
+        String initialLine = version + SPACE + statusNumber + SPACE + statusCode + CRLF;
+        String headers = stringifyHeaders();
+
+        return hasBody() ? initialLine + headers + body + CRLF : initialLine + headers;
+    }
+
+    @Override
     public String getVersion() {
         return this.version;
     }
@@ -44,6 +52,19 @@ public class GetResponse implements Response {
     @Override
     public String getBody() {
         return this.body;
+    }
+
+    private String stringifyHeaders() {
+        StringBuilder headersAsAString = new StringBuilder();
+        for (Map.Entry<String, String> set : headers.entrySet()) {
+            headersAsAString.append(set.getKey()).append(": ").append(set.getValue()).append(CRLF);
+        }
+        headersAsAString.append(CRLF).append(CRLF);
+        return headersAsAString.toString();
+    }
+
+    private boolean hasBody() {
+        return body != null;
     }
 
 }

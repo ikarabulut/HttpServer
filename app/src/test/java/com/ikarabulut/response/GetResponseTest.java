@@ -1,8 +1,5 @@
 package com.ikarabulut.response;
 
-import com.ikarabulut.response.GetResponse;
-import com.ikarabulut.response.GetResponseBuilder;
-import com.ikarabulut.response.StatusCode;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -44,8 +41,40 @@ class GetResponseTest {
                 .build();
 
         assertEquals(expectedBody, getResponse.getBody());
+    }
 
+    @Test
+    @DisplayName("A GetResponse with a body should return a string with a body when stringified")
+    void stringifyResponse_WithBody() {
+        String expectedBody = "Hello World";
+        String expectedResponse = version + " " + statusNumber + " " + statusCode + "\r\n" +
+                "Date: " + headers.get("Date") + "\r\n" +
+                "Content-Language: " + headers.get("Content-Language") + "\r\n" +
+                "\r\n" + "\r\n" +
+                expectedBody +
+                "\r\n";
+        GetResponse getResponse = new GetResponseBuilder(version, statusCode, statusNumber, headers)
+                .body(expectedBody)
+                .build();
 
+        String stringifiedResponse = getResponse.stringifyResponse();
+
+        assertEquals(expectedResponse, stringifiedResponse);
+    }
+
+    @Test
+    @DisplayName("A GetResponse without a body should return a string without a body when stringified")
+    void stringifyResponse_WithoutBody() {
+        String expectedResponse = version + " " + statusNumber + " " + statusCode + "\r\n" +
+                "Date: " + headers.get("Date") + "\r\n" +
+                "Content-Language: " + headers.get("Content-Language") + "\r\n" +
+                "\r\n" + "\r\n";
+        GetResponse getResponse = new GetResponseBuilder(version, statusCode, statusNumber, headers)
+                .build();
+
+        String stringifiedResponse = getResponse.stringifyResponse();
+
+        assertEquals(expectedResponse, stringifiedResponse);
     }
 
 }
