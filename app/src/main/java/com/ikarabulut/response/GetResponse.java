@@ -16,9 +16,12 @@ public class GetResponse implements Response {
         this.headers = headers;
     }
 
-    public GetResponse(GetResponseBuilder getResponseBuilder) {
-        this(getResponseBuilder.version, getResponseBuilder.statusCode, getResponseBuilder.statusNumber, getResponseBuilder.headers);
-        this.body = getResponseBuilder.body;
+    public GetResponse(String version, StatusCode statusCode, String statusNumber, Map<String, String> headers, String body) {
+        this.version = version;
+        this.statusCode = statusCode;
+        this.statusNumber = statusNumber;
+        this.headers = headers;;
+        this.body = body;
     }
 
     @Override
@@ -27,31 +30,6 @@ public class GetResponse implements Response {
         String headers = stringifyHeaders();
 
         return hasBody() ? initialLine + headers + body + CRLF : initialLine + headers;
-    }
-
-    @Override
-    public String getVersion() {
-        return this.version;
-    }
-
-    @Override
-    public StatusCode getStatusCode() {
-        return this.statusCode;
-    }
-
-    @Override
-    public String getStatusNumber() {
-        return this.statusNumber;
-    }
-
-    @Override
-    public Map<String, String> getHeaders() {
-        return this.headers;
-    }
-
-    @Override
-    public String getBody() {
-        return this.body;
     }
 
     private String stringifyHeaders() {

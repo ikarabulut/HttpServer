@@ -1,38 +1,41 @@
 package com.ikarabulut.response;
 
 import java.util.Date;
+import java.util.Map;
 
-public class HeadResponse {
+public class HeadResponse implements Response {
+    protected final String version;
+    protected final StatusCode statusCode;
+    protected final String statusNumber;
+    protected final Map<String, String> headers;
     private String CRLF = "\r\n";
     private String httpVersion;
     private boolean isValidPath;
     private String initialResponseLine;
     private String responseHeaderLines;
 
-
-    public HeadResponse(boolean isValidPath, String httpVersion) {
-        this.httpVersion = httpVersion;
-        this.isValidPath = isValidPath;
-
-        generateInitialResponseLine();
-        generateResponseHeaderLines();
+    public HeadResponse(String version, StatusCode statusCode, String statusNumber, Map<String, String> headers) {
+        this.version = version;
+        this.statusCode = statusCode;
+        this.statusNumber = statusNumber;
+        this.headers = headers;
     }
 
-    public String stringifyHeadResponse() {
-        return initialResponseLine + responseHeaderLines;
+    @Override
+    public String stringifyResponse() {
+        String initialLine = version + SPACE + statusNumber + SPACE + statusCode + CRLF;
+        String headers = stringifyHeaders();
+
+        return initialLine + headers;
     }
 
-    private void generateInitialResponseLine() {
-        StatusCode statusCode = StatusCode.OK;
-        String statusNumber = statusCode.getStatusNumber();
-
-        initialResponseLine = httpVersion + " " + statusNumber + " " + statusCode + CRLF;
+    private String stringifyHeaders() {
+        StringBuilder headersAsAString = new StringBuilder();
+        for (Map.Entry<String, String> set : headers.entrySet()) {
+            headersAsAString.append(set.getKey()).append(": ").append(set.getValue()).append(CRLF);
+        }
+        headersAsAString.append(CRLF).append(CRLF);
+        return headersAsAString.toString();
     }
 
-    private void generateResponseHeaderLines() {
-        Date date = new Date();
-        String dateHeader = "Date: " + date.toString();
-
-        responseHeaderLines = dateHeader + CRLF;
-    }
 }

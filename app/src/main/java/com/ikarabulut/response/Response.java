@@ -7,9 +7,4 @@ public interface Response {
     final String SPACE = " ";
     public String stringifyResponse();
 
-    String getVersion();
-    StatusCode getStatusCode();
-    String getStatusNumber();
-    Map<String, String> getHeaders();
-    String getBody();
 }

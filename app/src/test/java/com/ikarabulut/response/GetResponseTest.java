@@ -21,29 +21,6 @@ class GetResponseTest {
     };
 
     @Test
-    @DisplayName("A GetResponse must be initialized with a version, status code, status name, and headers.")
-    void constructGetResponse() {
-        GetResponse getResponse = new GetResponse(version, statusCode, statusNumber, headers);
-
-        assertEquals(version, getResponse.getVersion());
-        assertEquals(statusCode, getResponse.getStatusCode());
-        assertEquals(statusNumber, getResponse.getStatusNumber());
-        assertEquals(headers, getResponse.getHeaders());
-
-    }
-
-    @Test
-    @DisplayName("A GetResponse that has a body of 'Hello World' should create a GetResponse body object of 'Hello World'")
-    void constructGetResponse_WithBody() {
-        String expectedBody = "Hello World";
-        GetResponse getResponse = new GetResponseBuilder(version, statusCode, statusNumber, headers)
-                .body(expectedBody)
-                .build();
-
-        assertEquals(expectedBody, getResponse.getBody());
-    }
-
-    @Test
     @DisplayName("A GetResponse with a body should return a string with a body when stringified")
     void stringifyResponse_WithBody() {
         String expectedBody = "Hello World";
@@ -53,10 +30,7 @@ class GetResponseTest {
                 "\r\n" + "\r\n" +
                 expectedBody +
                 "\r\n";
-        GetResponse getResponse = new GetResponseBuilder(version, statusCode, statusNumber, headers)
-                .body(expectedBody)
-                .build();
-
+        GetResponse getResponse = new GetResponse(version, statusCode, statusNumber, headers, expectedBody);
         String stringifiedResponse = getResponse.stringifyResponse();
 
         assertEquals(expectedResponse, stringifiedResponse);
@@ -69,8 +43,7 @@ class GetResponseTest {
                 "Date: " + headers.get("Date") + "\r\n" +
                 "Content-Language: " + headers.get("Content-Language") + "\r\n" +
                 "\r\n" + "\r\n";
-        GetResponse getResponse = new GetResponseBuilder(version, statusCode, statusNumber, headers)
-                .build();
+        GetResponse getResponse = new GetResponse(version, statusCode, statusNumber, headers);
 
         String stringifiedResponse = getResponse.stringifyResponse();
 

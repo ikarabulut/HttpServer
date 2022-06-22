@@ -14,10 +14,10 @@ public class HeadRequestRunner {
         this.acceptedPaths = new ArrayList<>( Arrays.asList("/simple_get", "/head_request"));
     }
 
-    public String processResponse(boolean isValidPath) {
-        HeadResponse responseHandler = new HeadResponse(isValidPath, httpVersion);
-        return responseHandler.stringifyHeadResponse();
-    }
+//    public String processResponse(boolean isValidPath) {
+//        HeadResponse responseHandler = new HeadResponse();
+//        return responseHandler.stringifyHeadResponse();
+//    }
 
     public boolean isValidPath() {
         return acceptedPaths.contains(httpPath);

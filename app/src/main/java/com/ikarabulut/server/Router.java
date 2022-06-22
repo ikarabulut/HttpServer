@@ -15,17 +15,17 @@ public class Router {
         String method = initialLine.get("httpMethod");
         switch (method) {
             case "HEAD":
-                return runHeadRequest();
+//                return runHeadRequest();
         }
         return null;
     }
 
-    public String runHeadRequest() {
-        HeadRequestRunner requestRunner = new HeadRequestRunner(initialLine);
-        boolean pathIsValid = requestRunner.isValidPath();
-        String response = requestRunner.processResponse(pathIsValid);
-
-        return response;
-    }
+//    public String runHeadRequest() {
+//        HeadRequestRunner requestRunner = new HeadRequestRunner(initialLine);
+//        boolean pathIsValid = requestRunner.isValidPath();
+//        String response = requestRunner.processResponse(pathIsValid);
+//
+//        return response;
+//    }
 
 }
