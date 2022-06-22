@@ -7,7 +7,7 @@ public class GetResponse implements Response {
     protected final StatusCode statusCode;
     protected final String statusNumber;
     protected final Map<String, String> headers;
-    protected String body;
+    protected String body = " ";
 
     public GetResponse(String version, StatusCode statusCode, String statusNumber, Map<String, String> headers) {
         this.version = version;
@@ -29,11 +29,11 @@ public class GetResponse implements Response {
         String initialLine = version + SPACE + statusNumber + SPACE + statusCode + CRLF;
         String headers = stringifyHeaders();
 
-        return hasBody() ? initialLine + headers + body + CRLF : initialLine + headers;
+        return hasBody() ? initialLine + headers + body : initialLine + headers;
     }
 
     public boolean hasBody() {
-        return body != null;
+        return !body.equals(" ");
     }
 
     private String stringifyHeaders() {
@@ -41,7 +41,7 @@ public class GetResponse implements Response {
         for (Map.Entry<String, String> set : headers.entrySet()) {
             headersAsAString.append(set.getKey()).append(": ").append(set.getValue()).append(CRLF);
         }
-        headersAsAString.append(CRLF).append(CRLF);
+        headersAsAString.append(CRLF);
         return headersAsAString.toString();
     }
 

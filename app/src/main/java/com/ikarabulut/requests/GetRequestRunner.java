@@ -21,7 +21,7 @@ public class GetRequestRunner {
                 put("Content-Language", "en-US");
             }
         };
-        this.body = "Hello World";
+        this.body = "Hello world";
     }
 
     public Response processResponse() {

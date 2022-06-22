@@ -14,7 +14,7 @@ public class ClientWriter {
 
     }
     public void printOutput(String input) {
-        socketWriter.println(input);
+        socketWriter.print(input);
     }
 
     public void closeWriter() {
