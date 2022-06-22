@@ -1,6 +1,8 @@
 package com.ikarabulut.server;
 
+import com.ikarabulut.requests.GetRequestRunner;
 import com.ikarabulut.requests.HeadRequestRunner;
+import com.ikarabulut.response.Response;
 
 import java.util.Map;
 
@@ -11,21 +13,29 @@ public class Router {
         this.initialLine = initialLine;
     }
 
-    public String routeRequest() {
+    public Response routeRequest() {
         String method = initialLine.get("httpMethod");
         switch (method) {
             case "HEAD":
-//                return runHeadRequest();
+                return runHeadRequest();
+            case "GET":
+                return runGetRequest();
         }
         return null;
     }
 
-//    public String runHeadRequest() {
-//        HeadRequestRunner requestRunner = new HeadRequestRunner(initialLine);
-//        boolean pathIsValid = requestRunner.isValidPath();
-//        String response = requestRunner.processResponse(pathIsValid);
-//
-//        return response;
-//    }
+    public Response runHeadRequest() {
+        HeadRequestRunner requestRunner = new HeadRequestRunner(initialLine);
+        Response response = requestRunner.processResponse();
+
+        return response;
+    }
+
+    public Response runGetRequest() {
+        GetRequestRunner requestRunner = new GetRequestRunner(initialLine);
+        Response response = requestRunner.processResponse();
+
+        return response;
+    }
 
 }

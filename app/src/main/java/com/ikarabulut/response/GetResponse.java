@@ -32,6 +32,10 @@ public class GetResponse implements Response {
         return hasBody() ? initialLine + headers + body + CRLF : initialLine + headers;
     }
 
+    public boolean hasBody() {
+        return body != null;
+    }
+
     private String stringifyHeaders() {
         StringBuilder headersAsAString = new StringBuilder();
         for (Map.Entry<String, String> set : headers.entrySet()) {
@@ -39,10 +43,6 @@ public class GetResponse implements Response {
         }
         headersAsAString.append(CRLF).append(CRLF);
         return headersAsAString.toString();
-    }
-
-    private boolean hasBody() {
-        return body != null;
     }
 
 }

@@ -1,6 +1,7 @@
 package com.ikarabulut.handlers;
 
 import com.ikarabulut.io.ClientReader;
+import com.ikarabulut.response.Response;
 import com.ikarabulut.server.Router;
 import com.ikarabulut.io.ServerIO;
 import com.ikarabulut.parser.RequestParser;
@@ -27,12 +28,12 @@ public class ClientHandler implements Runnable {
             ClientReader clientReader = new ClientReader(clientSocket.getInputStream());
             RequestParser requestParser = new RequestParser(clientReader);
             Map<String, String> initialLine = requestParser.parseInitialLine();
-            Map<String, String> headers = requestParser.parseHeaders();
 
             Router router = new Router(initialLine);
-            String response = router.routeRequest();
+            Response response = router.routeRequest();
+            System.out.println(response.stringifyResponse());
 
-            serverIO.printOutput(writer, response);
+            serverIO.printOutput(writer, response.stringifyResponse());
             closeClientConnection();
         } catch (IOException ex) {
             ex.printStackTrace();

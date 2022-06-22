@@ -8,11 +8,6 @@ public class HeadResponse implements Response {
     protected final StatusCode statusCode;
     protected final String statusNumber;
     protected final Map<String, String> headers;
-    private String CRLF = "\r\n";
-    private String httpVersion;
-    private boolean isValidPath;
-    private String initialResponseLine;
-    private String responseHeaderLines;
 
     public HeadResponse(String version, StatusCode statusCode, String statusNumber, Map<String, String> headers) {
         this.version = version;
@@ -27,6 +22,11 @@ public class HeadResponse implements Response {
         String headers = stringifyHeaders();
 
         return initialLine + headers;
+    }
+
+    @Override
+    public boolean hasBody() {
+        return false;
     }
 
     private String stringifyHeaders() {
