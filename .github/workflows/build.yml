@@ -29,16 +29,3 @@ jobs:
         run: ./gradlew test
       - name: Upload coverage reports to Codecov with GitHub Action
         uses: codecov/codecov-action@v3
-      - name: Set up Ruby
-        uses: ruby/setup-ruby@359bebbc29cbe6c87da6bc9ea3bc930432750108
-        with:
-          ruby-version: '2.5.1'
-          working-directory: ./http_server_spec
-      - name: Bundle Ruby
-        working-directory: ./http_server_spec
-        run: bundle install
-      - name: Run the Java Http Server and shunt it to the background
-        run: ./gradlew run &
-      - name: Run the Ruby Tests
-        working-directory: ./http_server_spec
-        run: bundle exec spinach
