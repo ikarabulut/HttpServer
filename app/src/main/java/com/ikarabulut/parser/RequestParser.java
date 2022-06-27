@@ -8,40 +8,44 @@ import java.util.Map;
 
 public class RequestParser {
     private ClientReader clientReader;
-    private String requestString;
+    private String rawRequest;
 
     public RequestParser(ClientReader clientReader) {
         this.clientReader = clientReader;
         try {
-            requestString = clientReader.stringifyInput();
+            rawRequest = clientReader.stringifyInput();
         } catch (IOException ex) {
             System.err.print("Unable to parse InputStream into String");
-            requestString = "unable to parse";
+            rawRequest = "unable to parse";
         }
     }
 
     public Map<String, String> parseInitialLine() {
-        Map<String, String> initialLineMap = new HashMap<>();
-        String[] splitInitialLine = requestString.split("\r?\n");
-        String[] initialLineArray = splitInitialLine[0].split(" ", 3);
+        String[] lines = rawRequest.split("\r?\n");
+        String firstLine = lines[0];
+        String[] firstLineParts = firstLine.split(" ", 3);
+        Map<String, String> initialLine = new HashMap<>();
 
-        initialLineMap.put("httpMethod", initialLineArray[0]);
-        initialLineMap.put("httpPath", initialLineArray[1]);
-        initialLineMap.put("httpVersion", initialLineArray[2]);
+        initialLine.put("httpMethod", firstLineParts[0]);
+        initialLine.put("httpPath", firstLineParts[1]);
+        initialLine.put("httpVersion", firstLineParts[2]);
 
-        return initialLineMap;
+        return initialLine;
     }
 
     public Map<String, String> parseHeaders() {
+        String[] splitRequest = rawRequest.split("\r?\n");
         Map<String, String> headers = new HashMap<>();
-        String[] splitRequestString = requestString.split("\r?\n");
 
-        for (int i = 1; i < splitRequestString.length; i++) {
-            if (splitRequestString[i].equals("")) {
+        for (int i = 1; i < splitRequest.length; i++) {
+            String headerLine = splitRequest[i];
+            if (headerLine.equals("")) {
                 break;
             } else {
-                String[] line = splitRequestString[i].split(": ", 2);
-                headers.put(line[0], line[1]);
+                String[] line = splitRequest[i].split(": ", 2);
+                String headerName = line[0];
+                String headerValue = line[1];
+                headers.put(headerName, headerValue);
             }
         }
         return headers;
