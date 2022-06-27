@@ -9,8 +9,7 @@ public class ClientWriter {
 
     public ClientWriter(OutputStream outputStream) {
         this.outputStream = outputStream;
-        boolean useAutoFlush = true;
-        this.socketWriter = new PrintWriter(outputStream, useAutoFlush);
+        this.socketWriter = new PrintWriter(outputStream);
 
     }
 
