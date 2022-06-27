@@ -27,7 +27,7 @@ class RouterTest {
     }
 
     @Test
-    @DisplayName("When a Router takes in a GET request routeRequest should call runHeadMethod")
+    @DisplayName("When a Router takes in a GET request routeRequest should call runGetMethod")
     void getRequestHandler() {
         initialLine.put("httpMethod", "GET");
         initialLine.put("httpPath", "/test");
