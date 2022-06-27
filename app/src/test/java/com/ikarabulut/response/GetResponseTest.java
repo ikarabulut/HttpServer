@@ -38,7 +38,6 @@ class GetResponseTest {
     @Test
     @DisplayName("A GetResponse without a body should return a string without a body when stringified")
     void stringifyResponse_WithoutBody() {
-        String emptyBody = " ";
         String expectedResponse = version + " " + statusNumber + " " + statusCode + "\r\n" +
                 "Date: " + headers.get("Date") + "\r\n" +
                 "Content-Language: " + headers.get("Content-Language") + "\r\n" + "\r\n";

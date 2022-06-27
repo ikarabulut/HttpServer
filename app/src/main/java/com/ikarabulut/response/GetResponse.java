@@ -7,13 +7,10 @@ public class GetResponse implements Response {
     protected final StatusCode statusCode;
     protected final String statusNumber;
     protected final Map<String, String> headers;
-    protected String body = " ";
+    protected String body;
 
     public GetResponse(String version, StatusCode statusCode, String statusNumber, Map<String, String> headers) {
-        this.version = version;
-        this.statusCode = statusCode;
-        this.statusNumber = statusNumber;
-        this.headers = headers;
+        this(version, statusCode, statusNumber, headers, EMPTYLINE);
     }
 
     public GetResponse(String version, StatusCode statusCode, String statusNumber, Map<String, String> headers, String body) {
@@ -33,7 +30,7 @@ public class GetResponse implements Response {
     }
 
     public boolean hasBody() {
-        return !body.equals(" ");
+        return !body.equals(EMPTYLINE);
     }
 
     private String stringifyHeaders() {
