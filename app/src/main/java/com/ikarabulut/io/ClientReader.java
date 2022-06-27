@@ -13,17 +13,17 @@ public class ClientReader {
 
     public String stringifyInput() throws IOException {
         requestReader = new BufferedReader(requestReader, availableBytes);
-        StringBuilder sb = new StringBuilder();
-        int c;
+        StringBuilder stringBuilder = new StringBuilder();
+        int character;
         int bytesRead = 0;
         while (bytesRead < availableBytes) {
-            c = requestReader.read();
-            if (c == -1) break;
-            sb.append((char) c);
+            character = requestReader.read();
+            if (character == -1) break;
+            stringBuilder.append((char) character);
             bytesRead++;
         }
-        System.out.println("Incoming Request: " + "\r\n" + sb);
-        return sb.toString();
+        System.out.println("Incoming Request: " + "\r\n" + stringBuilder);
+        return stringBuilder.toString();
     }
 
 }

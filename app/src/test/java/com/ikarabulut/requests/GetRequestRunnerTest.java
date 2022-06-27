@@ -18,9 +18,9 @@ class GetRequestRunnerTest {
         initialLine.put("httpVersion", "HTTP/1.1");
         GetRequestRunner getRequestRunner = new GetRequestRunner(initialLine);
 
-        Response recievedResponse = getRequestRunner.processResponse();
+        Response receivedResponse = getRequestRunner.processResponse();
 
-        assertFalse(recievedResponse.hasBody());
+        assertFalse(receivedResponse.hasBody());
     }
 
     @Test
@@ -31,9 +31,9 @@ class GetRequestRunnerTest {
         initialLine.put("httpVersion", "HTTP/1.1");
         GetRequestRunner getRequestRunner = new GetRequestRunner(initialLine);
 
-        Response recievedResponse = getRequestRunner.processResponse();
+        Response receivedResponse = getRequestRunner.processResponse();
 
-        assertTrue(recievedResponse.hasBody());
+        assertTrue(receivedResponse.hasBody());
     }
 
 
