@@ -6,6 +6,7 @@ import org.mockito.Mockito;
 
 import java.io.IOException;
 import java.net.ServerSocket;
+import java.net.Socket;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
@@ -33,6 +34,21 @@ class ServerTest {
         spyServer.bind();
 
         verify(socketFactory).createServerSocket(PORT);
+    }
+
+    @Test
+    @DisplayName("When bind() is called, then the server should be able accept a connection, creating a Socket if available")
+    void bind_ClientSocketIsAccepted() throws IOException {
+        ServerSocket serverSocket = mock(ServerSocket.class);
+        Socket clientSocket = mock(Socket.class);
+        when(socketFactory.createServerSocket(PORT)).thenReturn(serverSocket);
+        when(socketFactory.createClientSocket(serverSocket)).thenReturn(clientSocket);
+        Server server = new Server(PORT, socketFactory);
+        Server spyServer = Mockito.spy(server);
+
+        spyServer.bind();
+
+        verify(socketFactory.createClientSocket(serverSocket));
     }
 
 }
