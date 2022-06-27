@@ -17,28 +17,32 @@ public class Server {
         this.socketFactory = socketFactory;
     }
 
-    public void start() throws IOException {
+    public void bind() throws IOException {
         ServerSocket serverSocket = socketFactory.createServerSocket(port);
 
         ExecutorService pool = Executors.newFixedThreadPool(THREAD_COUNT);
 
-        serverIsListening(serverSocket, pool);
+        listenForConnections(serverSocket, pool);
     }
 
     public int getPort() {
         return this.port;
     }
 
-    private void serverIsListening(ServerSocket serverSocket, ExecutorService pool) {
+    private void listenForConnections(ServerSocket serverSocket, ExecutorService pool) {
         while (serverSocket.isBound()) {
             try {
-                Socket clientSocket = socketFactory.createClientSocket(serverSocket);
-                pool.execute(new ClientHandler(clientSocket));
+                accept(serverSocket, pool);
             } catch (IOException ex) {
                 ex.printStackTrace();
                 System.err.println("Unable to bind Client Socket");
             }
         }
+    }
+
+    private void accept(ServerSocket serverSocket, ExecutorService pool) throws IOException {
+        Socket clientSocket = socketFactory.createClientSocket(serverSocket);
+        pool.execute(new ClientHandler(clientSocket));
     }
 
 
