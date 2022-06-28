@@ -1,4 +1,4 @@
-package com.ikarabulut.response.status;
+package com.ikarabulut.response;
 
 public enum StatusCode {
     OK("200");
@@ -7,7 +7,7 @@ public enum StatusCode {
 
     StatusCode(String statusCode) {
         this.code = statusCode;
-;    }
+    }
 
     public String getStatusNumber() {
         return code;

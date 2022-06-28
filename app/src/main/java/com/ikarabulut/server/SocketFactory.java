@@ -11,7 +11,7 @@ public class SocketFactory {
     }
 
     public Socket createClientSocket(ServerSocket serverSocket) throws IOException {
-            return serverSocket.accept();
+        return serverSocket.accept();
     }
 
 }

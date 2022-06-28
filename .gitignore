@@ -6,3 +6,6 @@ build
 
 # Ignore .idea directory
 .idea
+
+# Ignore ds directory
+.DS_store

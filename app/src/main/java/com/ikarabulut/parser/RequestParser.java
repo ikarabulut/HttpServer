@@ -1,48 +1,54 @@
 package com.ikarabulut.parser;
 
-import java.io.BufferedReader;
+import com.ikarabulut.io.ClientReader;
+
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.Map;
 
 public class RequestParser {
-    private BufferedReader request;
-    private HashMap<String, String> initialLine;
-    private HashMap<String, String> headers;
+    private ClientReader clientReader;
+    private String rawRequest;
 
-    public RequestParser(BufferedReader request) {
-        this.request = request;
+    public RequestParser(ClientReader clientReader) {
+        this.clientReader = clientReader;
+        try {
+            rawRequest = clientReader.stringifyInput();
+        } catch (IOException ex) {
+            System.err.print("Unable to parse InputStream into String");
+            rawRequest = "unable to parse";
+        }
     }
 
-    public HashMap<String, String> parseInitialLine() throws IOException {
-        String initialLineString = request.readLine();
-        initialLine = new HashMap<>();
-        String[] splitRequestLine = initialLineString.split(" ", 3);
-        initialLine.put("httpMethod", splitRequestLine[0]);
-        initialLine.put("httpPath", splitRequestLine[1]);
-        initialLine.put("httpVersion", splitRequestLine[2]);
+    public Map<String, String> parseInitialLine() {
+        String[] lines = rawRequest.split("\r?\n");
+        String firstLine = lines[0];
+        String[] firstLineParts = firstLine.split(" ", 3);
+        Map<String, String> initialLine = new HashMap<>();
+
+        initialLine.put("httpMethod", firstLineParts[0]);
+        initialLine.put("httpPath", firstLineParts[1]);
+        initialLine.put("httpVersion", firstLineParts[2]);
+
         return initialLine;
     }
 
-    public HashMap<String, String> parseHeaders() throws IOException {
-        String throwAwayFirstLine = request.readLine();
-        String headerString;
-        headers = new HashMap<>();
-        while (true) {
-            headerString = request.readLine();
-            if (headerString.equals("")) {
+    public Map<String, String> parseHeaders() {
+        String[] splitRequest = rawRequest.split("\r?\n");
+        Map<String, String> headers = new HashMap<>();
+
+        for (int i = 1; i < splitRequest.length; i++) {
+            String headerLine = splitRequest[i];
+            if (headerLine.equals("")) {
                 break;
+            } else {
+                String[] line = splitRequest[i].split(": ", 2);
+                String headerName = line[0];
+                String headerValue = line[1];
+                headers.put(headerName, headerValue);
             }
-            String[] splitHeader = headerString.split(": ", 2);
-            String headerKey = splitHeader[0];
-            String headerValue = splitHeader[1];
-            headers.put(headerKey, headerValue);
         }
         return headers;
     }
 
-    public HashMap<String, String> getInitialLine() {
-        return initialLine;
-    }
-
-    public HashMap<String, String> getHeaders() { return headers; }
 }

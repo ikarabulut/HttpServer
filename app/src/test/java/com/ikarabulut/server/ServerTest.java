@@ -1,23 +1,38 @@
 package com.ikarabulut.server;
 
-import com.ikarabulut.io.ServerIO;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.mockito.Mockito;
+
+import java.io.IOException;
+import java.net.ServerSocket;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
 class ServerTest {
+    int PORT = 5000;
     private SocketFactory socketFactory = mock(SocketFactory.class);
-    private ServerIO serverIO = mock(ServerIO.class);
 
     @Test
-    @DisplayName("When a new Server object is created, the server should be bound to the provided port")
+    @DisplayName("When a new Server object is created, this.port should be equal to the port argument")
     void createNewServerObject() {
-        int port = 5000;
-        Server server = new Server(port, socketFactory, serverIO);
+        Server server = new Server(PORT, socketFactory);
 
-        assertEquals(port, server.getPort());
+        assertEquals(PORT, server.getPort());
+    }
+
+    @Test
+    @DisplayName("When bind() is called, then the SocketFactory will have createServerSocket called")
+    void bind_ServerSocketIsGenerated() throws IOException {
+        ServerSocket serverSocket = mock(ServerSocket.class);
+        when(socketFactory.createServerSocket(PORT)).thenReturn(serverSocket);
+        Server server = new Server(PORT, socketFactory);
+        Server spyServer = Mockito.spy(server);
+
+        spyServer.start();
+
+        verify(socketFactory).createServerSocket(PORT);
     }
 
 }

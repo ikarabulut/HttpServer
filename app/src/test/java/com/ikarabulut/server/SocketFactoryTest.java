@@ -14,13 +14,16 @@ class SocketFactoryTest {
     private SocketFactory socketFactory = new SocketFactory();
 
     @Test
-    @DisplayName("A new ServerSocket should be created with the passed port number")
+    @DisplayName("A new ServerSocket should be created and bound to the port argument")
     void createServerSocket() throws IOException {
         int port = 5000;
         ServerSocket serverSocket = socketFactory.createServerSocket(port);
 
         int createdServerSocketPort = serverSocket.getLocalPort();
         assertEquals(port, createdServerSocketPort);
+        assert(serverSocket.isBound());
+
+        serverSocket.close();
     }
 
     @Test
