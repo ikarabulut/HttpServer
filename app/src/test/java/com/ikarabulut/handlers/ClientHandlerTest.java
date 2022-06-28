@@ -43,10 +43,9 @@ class ClientHandlerTest {
         InputStream inputStream = mock(InputStream.class);
         when(clientSocket.getInputStream()).thenReturn(inputStream);
         ClientWriter writer = mock(ClientWriter.class);
-        ClientWriter writerSpy = Mockito.spy(writer);
         ClientHandler clientHandler = new ClientHandler(clientSocket);
 
-        clientHandler.closeClientConnection(writerSpy);
+        clientHandler.closeClientConnection(writer);
 
         verify(clientSocket).close();
     }
@@ -58,12 +57,26 @@ class ClientHandlerTest {
         InputStream inputStream = mock(InputStream.class);
         when(clientSocket.getInputStream()).thenReturn(inputStream);
         ClientWriter writer = mock(ClientWriter.class);
+        ClientHandler clientHandler = new ClientHandler(clientSocket);
+
+        clientHandler.closeClientConnection(writer);
+
+        verify(inputStream).close();
+    }
+
+    @Test
+    @DisplayName("When closeClientConnection is called, then the ClientWriter closeWriter method should be called")
+    void closeClientConnection_CheckClientWriterCloses() throws IOException {
+        Socket clientSocket = mock(Socket.class);
+        InputStream inputStream = mock(InputStream.class);
+        when(clientSocket.getInputStream()).thenReturn(inputStream);
+        ClientWriter writer = mock(ClientWriter.class);
         ClientWriter writerSpy = Mockito.spy(writer);
         ClientHandler clientHandler = new ClientHandler(clientSocket);
 
         clientHandler.closeClientConnection(writerSpy);
 
-        verify(inputStream).close();
+        verify(writerSpy).closeWriter();
     }
 
 
