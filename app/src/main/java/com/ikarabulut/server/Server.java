@@ -17,7 +17,7 @@ public class Server {
         this.socketFactory = socketFactory;
     }
 
-    public void bind() throws IOException {
+    public void start() throws IOException {
         ServerSocket serverSocket = socketFactory.createServerSocket(port);
 
         ExecutorService pool = Executors.newFixedThreadPool(THREAD_COUNT);

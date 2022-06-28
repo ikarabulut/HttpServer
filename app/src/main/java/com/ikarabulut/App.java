@@ -13,7 +13,7 @@ public class App {
         Server server = new Server(PORT, socketFactory);
         System.out.println("You are listening on port: " + PORT);
         try {
-            server.bind();
+            server.start();
         } catch (IOException ex) {
             ex.printStackTrace();
             System.err.print("Unable to connect server");

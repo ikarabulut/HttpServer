@@ -30,7 +30,7 @@ class ServerTest {
         Server server = new Server(PORT, socketFactory);
         Server spyServer = Mockito.spy(server);
 
-        spyServer.bind();
+        spyServer.start();
 
         verify(socketFactory).createServerSocket(PORT);
     }
