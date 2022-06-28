@@ -10,7 +10,7 @@ public class GetResponse implements Response {
     protected String body;
 
     public GetResponse(String version, StatusCode statusCode, String statusNumber, Map<String, String> headers) {
-        this(version, statusCode, statusNumber, headers, EMPTYLINE);
+        this(version, statusCode, statusNumber, headers, EMPTYBODY);
     }
 
     public GetResponse(String version, StatusCode statusCode, String statusNumber, Map<String, String> headers, String body) {
@@ -30,7 +30,7 @@ public class GetResponse implements Response {
     }
 
     public boolean hasBody() {
-        return !body.equals(EMPTYLINE);
+        return !body.equals(EMPTYBODY);
     }
 
     private String stringifyHeaders() {
