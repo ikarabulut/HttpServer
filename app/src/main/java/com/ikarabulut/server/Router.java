@@ -6,15 +6,22 @@ import com.ikarabulut.response.Response;
 
 import java.util.*;
 
+
 public class Router {
     private Map<String, String> initialLine;
     private Map<String, List<String>> paths;
 
     public Router(Map<String, String> initialLine) {
         this.initialLine = initialLine;
-        List<String> methods = new ArrayList<>(Arrays.asList("HEAD, OPTIONS"));
-        this.paths = new HashMap<>();
-        this.paths.put("head_request", methods);
+        generateRoutes();
+    }
+
+    public void generateRoutes() {
+        this.paths = new HashMap<>() {{
+            put("/head_request", new ArrayList<>(Arrays.asList("HEAD", "OPTIONS")));
+            put("/simple_get", new ArrayList<>(Arrays.asList("GET", "HEAD")));
+            put("/simple_get_with_body", new ArrayList<>(Arrays.asList("GET", "HEAD")));
+        }};
     }
 
     public Response routeRequest() {
