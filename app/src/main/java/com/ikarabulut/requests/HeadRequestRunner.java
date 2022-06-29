@@ -7,7 +7,6 @@ import com.ikarabulut.response.StatusCode;
 import java.util.*;
 
 public class HeadRequestRunner {
-    List<String> acceptedPaths;
     Map<String, String> initialLine;
     Map<String, String> headers;
 
