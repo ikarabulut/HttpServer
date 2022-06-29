@@ -10,8 +10,8 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class MethodNotAllowedResponseTest {
     private String version = "HTTP/1.1";
-    private String statusCode = NewStatusCode.notAllowed().get("code");
-    private String statusNumber = NewStatusCode.notAllowed().get("number");
+    private String statusCode = StatusCode.NOT_ALLOWED.getStatusCode();
+    private String statusNumber = StatusCode.NOT_ALLOWED.getStatusNumber();
     private Map<String, String> headers = new HashMap<>() {
         {
             put("Allow", "HEAD, OPTIONS");
