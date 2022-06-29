@@ -14,7 +14,6 @@ public class GetRequestRunner {
 
     public GetRequestRunner(Map<String, String> initialLine) {
         this.initialLine = initialLine;
-        this.acceptedPaths = new ArrayList<>(Arrays.asList("/simple_get", "/simple_get_with_body"));
         this.headers = new HashMap<>() {
             {
                 put("Date", new Date().toString());

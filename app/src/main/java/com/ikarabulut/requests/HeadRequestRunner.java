@@ -13,7 +13,6 @@ public class HeadRequestRunner {
 
     public HeadRequestRunner(Map<String, String> initialLine) {
         this.initialLine = initialLine;
-        this.acceptedPaths = new ArrayList<>(Arrays.asList("/simple_get", "/head_request"));
         this.headers = new HashMap<>() {
             {
                 put("Date", new Date().toString());
@@ -27,11 +26,6 @@ public class HeadRequestRunner {
         StatusCode statusCode = StatusCode.OK;
         String statusNumber = statusCode.getStatusNumber();
         return new HeadResponse(version, statusCode, statusNumber, headers);
-    }
-
-    public boolean isValidPath() {
-        String path = initialLine.get("httpPath");
-        return acceptedPaths.contains(path);
     }
 
 
