@@ -16,7 +16,7 @@ class SocketFactoryTest {
     @Test
     @DisplayName("A new ServerSocket should be created and bound to the port argument")
     void createServerSocket() throws IOException {
-        int port = 5000;
+        int port = 5001;
         ServerSocket serverSocket = socketFactory.createServerSocket(port);
 
         int createdServerSocketPort = serverSocket.getLocalPort();
