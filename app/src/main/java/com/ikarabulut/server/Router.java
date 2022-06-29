@@ -2,6 +2,7 @@ package com.ikarabulut.server;
 
 import com.ikarabulut.requests.GetRequestRunner;
 import com.ikarabulut.requests.HeadRequestRunner;
+import com.ikarabulut.requests.MethodNotAllowedHandler;
 import com.ikarabulut.response.Response;
 
 import java.util.*;
@@ -37,7 +38,7 @@ public class Router {
             }
         } else {
             List<String> allowedMethods = paths.get(path);
-            notAllowed(paths.get(allowedMethods));
+            return notAllowed(paths.get(allowedMethods));
         }
         return null;
     }
@@ -56,7 +57,9 @@ public class Router {
         return response;
     }
 
-    public void notAllowed(List<String> acceptedMethods) {
+    public Response notAllowed(List<String> acceptedMethods) {
+        MethodNotAllowedHandler handler = new MethodNotAllowedHandler(acceptedMethods, initialLine);
+        return handler.processResponse();
     }
 
 }
