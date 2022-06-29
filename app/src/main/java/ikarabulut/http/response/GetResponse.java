@@ -1,4 +1,4 @@
-package ikarabulut.response;
+package ikarabulut.http.response;
 
 import java.util.Map;
 

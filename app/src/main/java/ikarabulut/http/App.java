@@ -1,7 +1,7 @@
 package ikarabulut.http;
 
-import ikarabulut.server.Server;
-import ikarabulut.server.SocketFactory;
+import ikarabulut.http.server.Server;
+import ikarabulut.http.server.SocketFactory;
 
 import java.io.IOException;
 

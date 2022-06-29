@@ -1,7 +1,5 @@
 package ikarabulut.http.server;
 
-import ikarabulut.server.Server;
-import ikarabulut.server.SocketFactory;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;

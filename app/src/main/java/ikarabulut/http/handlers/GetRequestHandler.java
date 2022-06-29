@@ -1,8 +1,8 @@
-package ikarabulut.handlers;
+package ikarabulut.http.handlers;
 
-import ikarabulut.response.GetResponse;
-import ikarabulut.response.Response;
-import ikarabulut.response.StatusCode;
+import ikarabulut.http.response.GetResponse;
+import ikarabulut.http.response.Response;
+import ikarabulut.http.response.StatusCode;
 
 import java.util.*;
 

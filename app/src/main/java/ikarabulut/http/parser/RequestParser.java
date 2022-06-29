@@ -1,6 +1,6 @@
-package ikarabulut.parser;
+package ikarabulut.http.parser;
 
-import ikarabulut.io.ClientReader;
+import ikarabulut.http.io.ClientReader;
 
 import java.io.IOException;
 import java.util.HashMap;

@@ -1,7 +1,6 @@
 package ikarabulut.http.parser;
 
-import ikarabulut.io.ClientReader;
-import ikarabulut.parser.RequestParser;
+import ikarabulut.http.io.ClientReader;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 

@@ -1,7 +1,6 @@
 package ikarabulut.http.handlers;
 
-import ikarabulut.handlers.GetRequestHandler;
-import ikarabulut.response.Response;
+import ikarabulut.http.response.Response;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 

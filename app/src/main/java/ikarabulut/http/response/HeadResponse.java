@@ -1,15 +1,14 @@
-package ikarabulut.response;
+package ikarabulut.http.response;
 
 import java.util.Map;
 
-public class MethodNotAllowedResponse implements Response {
+public class HeadResponse implements Response {
     protected final String version;
-    protected final String statusCode;
+    protected final StatusCode statusCode;
     protected final String statusNumber;
     protected final Map<String, String> headers;
-    protected final String body = EMPTYBODY;
 
-    public MethodNotAllowedResponse(String version, String statusCode, String statusNumber, Map<String,String> headers) {
+    public HeadResponse(String version, StatusCode statusCode, String statusNumber, Map<String, String> headers) {
         this.version = version;
         this.statusCode = statusCode;
         this.statusNumber = statusNumber;
@@ -21,7 +20,7 @@ public class MethodNotAllowedResponse implements Response {
         String initialLine = version + SPACE + statusNumber + SPACE + statusCode + CRLF;
         String headers = stringifyHeaders();
 
-        return initialLine + headers + body;
+        return initialLine + headers;
     }
 
     @Override
@@ -37,4 +36,5 @@ public class MethodNotAllowedResponse implements Response {
         headersAsAString.append(CRLF);
         return headersAsAString.toString();
     }
+
 }

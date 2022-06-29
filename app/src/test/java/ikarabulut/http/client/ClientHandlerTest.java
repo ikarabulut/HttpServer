@@ -1,7 +1,6 @@
 package ikarabulut.http.client;
 
-import ikarabulut.client.ClientHandler;
-import ikarabulut.io.ClientWriter;
+import ikarabulut.http.io.ClientWriter;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;

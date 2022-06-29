@@ -1,6 +1,6 @@
-package ikarabulut.server;
+package ikarabulut.http.server;
 
-import ikarabulut.client.ClientHandler;
+import ikarabulut.http.client.ClientHandler;
 
 import java.io.IOException;
 import java.net.ServerSocket;

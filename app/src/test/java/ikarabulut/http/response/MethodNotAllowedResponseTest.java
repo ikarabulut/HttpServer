@@ -1,8 +1,5 @@
 package ikarabulut.http.response;
 
-import ikarabulut.response.MethodNotAllowedResponse;
-import ikarabulut.response.Response;
-import ikarabulut.response.StatusCode;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 

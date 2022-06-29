@@ -1,4 +1,4 @@
-package ikarabulut.io;
+package ikarabulut.http.io;
 
 import java.io.*;
 

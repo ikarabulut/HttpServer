@@ -1,10 +1,10 @@
-package ikarabulut.client;
+package ikarabulut.http.client;
 
-import ikarabulut.io.ClientReader;
-import ikarabulut.response.Response;
-import ikarabulut.server.Router;
-import ikarabulut.io.ClientWriter;
-import ikarabulut.parser.RequestParser;
+import ikarabulut.http.io.ClientReader;
+import ikarabulut.http.response.Response;
+import ikarabulut.http.server.Router;
+import ikarabulut.http.io.ClientWriter;
+import ikarabulut.http.parser.RequestParser;
 
 import java.io.*;
 import java.net.Socket;

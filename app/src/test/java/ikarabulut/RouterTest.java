@@ -1,6 +1,6 @@
 package ikarabulut.http;
 
-import ikarabulut.server.Router;
+import ikarabulut.http.server.Router;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;

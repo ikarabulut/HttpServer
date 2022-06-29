@@ -1,4 +1,4 @@
-package ikarabulut.server;
+package ikarabulut.http.server;
 
 import java.io.IOException;
 import java.net.ServerSocket;

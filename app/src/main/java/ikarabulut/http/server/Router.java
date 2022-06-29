@@ -1,9 +1,9 @@
-package ikarabulut.server;
+package ikarabulut.http.server;
 
-import ikarabulut.handlers.GetRequestHandler;
-import ikarabulut.handlers.HeadRequestHandler;
-import ikarabulut.handlers.MethodNotAllowedHandler;
-import ikarabulut.response.Response;
+import ikarabulut.http.handlers.GetRequestHandler;
+import ikarabulut.http.handlers.HeadRequestHandler;
+import ikarabulut.http.handlers.MethodNotAllowedHandler;
+import ikarabulut.http.response.Response;
 
 import java.util.*;
 
