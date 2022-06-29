@@ -15,7 +15,7 @@ dependencies {
 }
 
 application {
-    mainClass = 'com.ikarabulut.App'
+    mainClass = 'ikarabulut.http.App'
 }
 
 tasks.named('test') {
