@@ -17,7 +17,7 @@ public class MethodNotAllowedHandler {
         this.initialLine = initialLine;
     }
 
-    public Map<String, String> generateAllowHeaders() {
+    public Map<String, String> generateHeaders() {
         Map<String, String> allowHeader = new HashMap<>() {{
             put("Allow", "HEAD, OPTIONS");
         }};
@@ -28,7 +28,7 @@ public class MethodNotAllowedHandler {
         String version = initialLine.get("httpVersion");
         String statusCode = StatusCode.NOT_ALLOWED.getStatusCode();
         String statusNumber = StatusCode.NOT_ALLOWED.getStatusNumber();
-        Map<String, String> headers = generateAllowHeaders();
+        Map<String, String> headers = generateHeaders();
 
         Response response = new MethodNotAllowedResponse(version, statusCode, statusNumber, headers);
 

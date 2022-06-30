@@ -23,7 +23,7 @@ class MethodNotAllowedHandlerTest {
 
         MethodNotAllowedHandler handler = new MethodNotAllowedHandler(allowedMethods, initialLine);
 
-        Map<String, String> generatedHeader = handler.generateAllowHeaders();
+        Map<String, String> generatedHeader = handler.generateHeaders();
 
         assertEquals(expectedHeader, generatedHeader);
     }

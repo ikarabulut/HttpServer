@@ -6,7 +6,7 @@ import ikarabulut.http.response.StatusCode;
 
 import java.util.*;
 
-public class HeadRequestHandler {
+public class HeadRequestHandler implements RequestHandler {
     Map<String, String> initialLine;
     Map<String, String> headers;
 
@@ -20,6 +20,7 @@ public class HeadRequestHandler {
         };
     }
 
+    @Override
     public Response processResponse() {
         String version = initialLine.get("httpVersion");
         StatusCode statusCode = StatusCode.OK;
