@@ -26,7 +26,7 @@ class HeadResponseTest {
         String expectedResponse = version + " " + statusNumber + " " + statusCode + "\r\n" +
                 "Date: " + headers.get("Date") + "\r\n" +
                 "Content-Language: " + headers.get("Content-Language") + "\r\n" +
-                "\r\n" + "\r\n";
+                "\r\n";
         HeadResponse headResponse = new HeadResponse(version, statusCode, statusNumber, headers);
 
         String stringifiedResponse = headResponse.stringifyResponse();

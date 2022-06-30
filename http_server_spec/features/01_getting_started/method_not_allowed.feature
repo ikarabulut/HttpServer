@@ -1,6 +1,5 @@
 @method-not-allowed @01-getting-started
 Feature: Method Not Allowed
-  @wip
   Scenario: Finding GET for an endpoint with only HEAD
     Given I make an GET request to "/head_request"
     Then my response should have status code 405
