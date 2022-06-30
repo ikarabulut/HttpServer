@@ -26,19 +26,16 @@ public class Router {
     }
 
     public Response routeRequest() {
-        String method = initialLine.get("httpMethod");
-        String path = initialLine.get("httpPath");
 
-        if (paths.get(path).contains(method)) {
-            switch (method) {
-                case "HEAD":
-                    return runHeadRequest();
-                case "GET":
-                    return runGetRequest();
-            }
-        } else {
-            List<String> allowedMethods = paths.get(path);
-            return methodNotAllowed(paths.get(allowedMethods));
+        if (!pathIncludesMethod()) {
+            return methodNotAllowed(pathsIncludedMethods());
+        }
+
+        switch (initialLine.get("httpMethod")) {
+            case "HEAD":
+                return runHeadRequest();
+            case "GET":
+                return runGetRequest();
         }
         return null;
     }
@@ -62,4 +59,14 @@ public class Router {
         return handler.processResponse();
     }
 
+    private boolean pathIncludesMethod() {
+        String method = initialLine.get("httpMethod");
+        String path = initialLine.get("httpPath");
+        return paths.get(path).contains(method);
+    }
+
+    private List<String> pathsIncludedMethods() {
+        String path = initialLine.get("httpPath");
+        return paths.get(path);
+    }
 }

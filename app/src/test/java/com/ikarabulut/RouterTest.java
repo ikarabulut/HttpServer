@@ -5,6 +5,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 
+import java.util.Arrays;
 import java.util.HashMap;
 
 class RouterTest {
@@ -50,7 +51,7 @@ class RouterTest {
 
         spyRouter.routeRequest();
 
-        Mockito.verify(spyRouter).methodNotAllowed(null);
+        Mockito.verify(spyRouter).methodNotAllowed(Arrays.asList("HEAD", "OPTIONS"));
     }
 
 }
