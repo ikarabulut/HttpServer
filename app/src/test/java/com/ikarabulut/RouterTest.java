@@ -50,7 +50,7 @@ class RouterTest {
 
         spyRouter.routeRequest();
 
-        Mockito.verify(spyRouter).notAllowed(null);
+        Mockito.verify(spyRouter).methodNotAllowed(null);
     }
 
 }

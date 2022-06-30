@@ -1,7 +1,8 @@
 package com.ikarabulut.response;
 
 public enum StatusCode {
-    OK("OK" , "200"), NOT_ALLOWED("NOT ALLOWED", "405");
+    OK("OK" , "200"),
+    NOT_ALLOWED("NOT ALLOWED", "405");
 
     final String code;
     final String number;

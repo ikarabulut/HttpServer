@@ -19,9 +19,9 @@ public class Router {
 
     public void generateRoutes() {
         this.paths = new HashMap<>() {{
-            put("/head_request", new ArrayList<>(Arrays.asList("HEAD", "OPTIONS")));
-            put("/simple_get", new ArrayList<>(Arrays.asList("GET", "HEAD")));
-            put("/simple_get_with_body", new ArrayList<>(Arrays.asList("GET", "HEAD")));
+            put("/head_request", Arrays.asList("HEAD", "OPTIONS"));
+            put("/simple_get", Arrays.asList("GET", "HEAD"));
+            put("/simple_get_with_body", Arrays.asList("GET", "HEAD"));
         }};
     }
 
@@ -38,7 +38,7 @@ public class Router {
             }
         } else {
             List<String> allowedMethods = paths.get(path);
-            return notAllowed(paths.get(allowedMethods));
+            return methodNotAllowed(paths.get(allowedMethods));
         }
         return null;
     }
@@ -57,7 +57,7 @@ public class Router {
         return response;
     }
 
-    public Response notAllowed(List<String> acceptedMethods) {
+    public Response methodNotAllowed(List<String> acceptedMethods) {
         MethodNotAllowedHandler handler = new MethodNotAllowedHandler(acceptedMethods, initialLine);
         return handler.processResponse();
     }
