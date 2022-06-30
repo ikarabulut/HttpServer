@@ -1,4 +1,4 @@
-package ikarabulut.http;
+package ikarabulut.http.server;
 
 import ikarabulut.http.server.Router;
 import org.junit.jupiter.api.DisplayName;
