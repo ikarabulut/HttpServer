@@ -3,9 +3,9 @@ package ikarabulut.http.response;
 import java.util.Map;
 
 public class HeadResponse implements Response {
-    protected final String version;
-    protected final StatusCode status;
-    protected final Map<String, String> headers;
+    private final String version;
+    private final StatusCode status;
+    private final Map<String, String> headers;
 
     public HeadResponse(String version, StatusCode status, Map<String, String> headers) {
         this.version = version;

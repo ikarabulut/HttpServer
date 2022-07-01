@@ -3,10 +3,10 @@ package ikarabulut.http.response;
 import java.util.Map;
 
 public class GetResponse implements Response {
-    protected final String version;
-    protected final StatusCode status;
-    protected final Map<String, String> headers;
-    protected String body;
+    private final String version;
+    private final StatusCode status;
+    private final Map<String, String> headers;
+    private String body;
 
     public GetResponse(String version, StatusCode status, Map<String, String> headers) {
         this(version, status, headers, EMPTYBODY);
