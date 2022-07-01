@@ -29,11 +29,24 @@ class HeadResponseTest {
                 "Date: " + headers.get("Date") + "\r\n" +
                 "Content-Language: " + headers.get("Content-Language") + "\r\n" +
                 "\r\n";
-        HeadResponse headResponse = new HeadResponse(version, status, headers);
+        HeadResponse headResponse = new HeadResponse(version, status);
 
         String stringifiedResponse = headResponse.stringifyResponse();
 
         assertEquals(expectedResponse, stringifiedResponse);
+    }
+
+    @Test
+    @DisplayName("A Header should be generated with at minimum the date")
+    void generateHeaders_DefaultDate() {
+        Map<String,String> defaultHeader = new HashMap<>() {{
+            put("Date", new Date().toString());
+        }};
+        Response response = new HeadResponse(version, status);
+
+        Map<String, String> generatedHeaders = response.generateHeaders();
+
+        assertTrue(generatedHeaders.containsKey("Date"));
     }
 
 }
