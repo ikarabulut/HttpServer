@@ -10,16 +10,6 @@ public class GetResponse implements Response {
     private Map<String, String> headers;
     private String body;
 
-    public GetResponse(String version, StatusCode status, Map<String, String> headers) {
-        this(version, status, headers, EMPTYBODY);
-    }
-
-    public GetResponse(String version, StatusCode status, Map<String, String> headers, String body) {
-        this.version = version;
-        this.status = status;
-        this.headers = headers;
-        this.body = body;
-    }
     public GetResponse(String version, StatusCode status) {
         this(version, status,EMPTYBODY);
     }

@@ -29,7 +29,7 @@ class GetResponseTest {
                 "Content-Language: " + headers.get("Content-Language") + "\r\n" +
                 "\r\n" +
                 expectedBody;
-        GetResponse getResponse = new GetResponse(version, status, headers, expectedBody);
+        GetResponse getResponse = new GetResponse(version, status, expectedBody);
         String stringifiedResponse = getResponse.stringifyResponse();
 
         assertEquals(expectedResponse, stringifiedResponse);
@@ -43,7 +43,7 @@ class GetResponseTest {
         String expectedResponse = version + " " + statusNumber + " " + statusCode + "\r\n" +
                 "Date: " + headers.get("Date") + "\r\n" +
                 "Content-Language: " + headers.get("Content-Language") + "\r\n" + "\r\n";
-        GetResponse getResponse = new GetResponse(version, status, headers);
+        GetResponse getResponse = new GetResponse(version, status);
 
         String stringifiedResponse = getResponse.stringifyResponse();
 
