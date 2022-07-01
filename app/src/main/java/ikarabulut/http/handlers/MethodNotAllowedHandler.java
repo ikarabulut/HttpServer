@@ -3,6 +3,7 @@ package ikarabulut.http.handlers;
 import ikarabulut.http.response.MethodNotAllowedResponse;
 import ikarabulut.http.response.Response;
 import ikarabulut.http.response.StatusCode;
+import jdk.jshell.Snippet;
 
 import java.util.HashMap;
 import java.util.List;
@@ -17,20 +18,11 @@ public class MethodNotAllowedHandler {
         this.initialLine = initialLine;
     }
 
-    public Map<String, String> generateAllowHeaders() {
-        Map<String, String> allowHeader = new HashMap<>() {{
-            put("Allow", "HEAD, OPTIONS");
-        }};
-        return allowHeader;
-    }
-
     public Response processResponse() {
         String version = initialLine.get("httpVersion");
-        String statusCode = StatusCode.NOT_ALLOWED.getStatusCode();
-        String statusNumber = StatusCode.NOT_ALLOWED.getStatusNumber();
-        Map<String, String> headers = generateAllowHeaders();
+        StatusCode status = StatusCode.NOT_ALLOWED;
 
-        Response response = new MethodNotAllowedResponse(version, statusCode, statusNumber, headers);
+        Response response = new MethodNotAllowedResponse(version, status);
 
         return response;
     }
