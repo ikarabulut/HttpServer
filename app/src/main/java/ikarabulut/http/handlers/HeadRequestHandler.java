@@ -23,9 +23,8 @@ public class HeadRequestHandler implements RequestHandler {
     @Override
     public Response processResponse() {
         String version = initialLine.get("httpVersion");
-        StatusCode statusCode = StatusCode.OK;
-        String statusNumber = statusCode.getStatusNumber();
-        return new HeadResponse(version, statusCode, statusNumber, headers);
+        StatusCode status = StatusCode.OK;
+        return new HeadResponse(version, status, headers);
     }
 
 

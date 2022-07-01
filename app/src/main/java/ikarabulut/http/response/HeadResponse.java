@@ -4,19 +4,20 @@ import java.util.Map;
 
 public class HeadResponse implements Response {
     protected final String version;
-    protected final StatusCode statusCode;
-    protected final String statusNumber;
+    protected final StatusCode status;
     protected final Map<String, String> headers;
 
-    public HeadResponse(String version, StatusCode statusCode, String statusNumber, Map<String, String> headers) {
+    public HeadResponse(String version, StatusCode status, Map<String, String> headers) {
         this.version = version;
-        this.statusCode = statusCode;
-        this.statusNumber = statusNumber;
+        this.status = status;
         this.headers = headers;
     }
 
     @Override
     public String stringifyResponse() {
+        String statusNumber = status.getStatusNumber();
+        String statusCode = status.getStatusCode();
+
         String initialLine = version + SPACE + statusNumber + SPACE + statusCode + CRLF;
         String headers = stringifyHeaders();
 
