@@ -4,20 +4,21 @@ import java.util.Map;
 
 public class MethodNotAllowedResponse implements Response {
     protected final String version;
-    protected final String statusCode;
-    protected final String statusNumber;
+    protected final StatusCode status;
     protected final Map<String, String> headers;
     protected final String body = EMPTYBODY;
 
-    public MethodNotAllowedResponse(String version, String statusCode, String statusNumber, Map<String,String> headers) {
+    public MethodNotAllowedResponse(String version, StatusCode status, Map<String,String> headers) {
         this.version = version;
-        this.statusCode = statusCode;
-        this.statusNumber = statusNumber;
+        this.status = status;
         this.headers = headers;
     }
 
     @Override
     public String stringifyResponse() {
+        String statusCode = status.getStatusCode();
+        String statusNumber = status.getStatusNumber();
+
         String initialLine = version + SPACE + statusNumber + SPACE + statusCode + CRLF;
         String headers = stringifyHeaders();
 
