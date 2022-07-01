@@ -7,5 +7,4 @@ import java.util.Map;
 public interface RequestHandler {
     Response processResponse();
 
-//    Map<String, String> generateHeaders();
 }

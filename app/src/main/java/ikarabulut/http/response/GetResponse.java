@@ -4,25 +4,26 @@ import java.util.Map;
 
 public class GetResponse implements Response {
     protected final String version;
-    protected final StatusCode statusCode;
-    protected final String statusNumber;
+    protected final StatusCode status;
     protected final Map<String, String> headers;
     protected String body;
 
-    public GetResponse(String version, StatusCode statusCode, String statusNumber, Map<String, String> headers) {
-        this(version, statusCode, statusNumber, headers, EMPTYBODY);
+    public GetResponse(String version, StatusCode status, Map<String, String> headers) {
+        this(version, status, headers, EMPTYBODY);
     }
 
-    public GetResponse(String version, StatusCode statusCode, String statusNumber, Map<String, String> headers, String body) {
+    public GetResponse(String version, StatusCode status, Map<String, String> headers, String body) {
         this.version = version;
-        this.statusCode = statusCode;
-        this.statusNumber = statusNumber;
+        this.status = status;
         this.headers = headers;
         this.body = body;
     }
 
     @Override
     public String stringifyResponse() {
+        String statusCode = status.getStatusCode();
+        String statusNumber = status.getStatusNumber();
+
         String initialLine = version + SPACE + statusNumber + SPACE + statusCode + CRLF;
         String headers = stringifyHeaders();
 

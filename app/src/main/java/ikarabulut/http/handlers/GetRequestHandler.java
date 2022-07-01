@@ -25,14 +25,15 @@ public class GetRequestHandler implements RequestHandler {
     @Override
     public Response processResponse() {
         String version = initialLine.get("httpVersion");
-        StatusCode statusCode = StatusCode.OK;
-        String statusNumber = statusCode.getStatusNumber();
+        StatusCode status = StatusCode.OK;
+        String statusCode = status.getStatusCode();
+        String statusNumber = status.getStatusNumber();
 
         Response getResponse;
         if (initialLine.get("httpPath").equals("/simple_get_with_body")) {
-            getResponse = new GetResponse(version, statusCode, statusNumber, headers, body);
+            getResponse = new GetResponse(version, status, headers, body);
         } else {
-            getResponse = new GetResponse(version, statusCode, statusNumber, headers);
+            getResponse = new GetResponse(version, status, headers);
         }
 
         return getResponse;
