@@ -3,6 +3,8 @@ package ikarabulut.http.response;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import java.util.Arrays;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -24,11 +26,24 @@ class MethodNotAllowedResponseTest {
         String statusNumber = status.getStatusNumber();
         String expectedResponse = version + " " + statusNumber + " " + statusCode + "\r\n" +
                 "Allow: " + headers.get("Allow") + "\r\n" + "\r\n";
-        Response response = new MethodNotAllowedResponse(version, status, headers);
+        Response response = new MethodNotAllowedResponse(version, status);
 
         String stringifiedResponse = response.stringifyResponse();
 
         assertEquals(expectedResponse, stringifiedResponse);
+    }
+
+    @Test
+    @DisplayName("A Header should be generated with at minimum the Allow name")
+    void generateHeaders_DefaultAllow() {
+        Map<String,String> defaultHeader = new HashMap<>() {{
+            put("Allow", "HEAD, GET");
+        }};
+        Response response = new MethodNotAllowedResponse(version, status);
+
+        Map<String, String> generatedHeaders = response.generateHeaders();
+
+        assertTrue(generatedHeaders.containsKey("Allow"));
     }
 
 }

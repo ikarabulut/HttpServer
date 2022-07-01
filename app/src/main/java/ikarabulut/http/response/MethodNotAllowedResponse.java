@@ -1,22 +1,25 @@
 package ikarabulut.http.response;
 
+import java.util.HashMap;
 import java.util.Map;
 
 public class MethodNotAllowedResponse implements Response {
     private final String version;
     private final StatusCode status;
-    private final Map<String, String> headers;
+    private Map<String, String> headers;
     private final String body = EMPTYBODY;
 
-    public MethodNotAllowedResponse(String version, StatusCode status, Map<String,String> headers) {
+    public MethodNotAllowedResponse(String version, StatusCode status) {
         this.version = version;
         this.status = status;
-        this.headers = headers;
     }
 
     @Override
     public Map<String, String> generateHeaders() {
-        return null; //TEMP
+        headers = new HashMap<>() {{
+            put("Allow", "HEAD, OPTIONS");
+        }};
+        return headers;
     }
 
     @Override
@@ -36,6 +39,8 @@ public class MethodNotAllowedResponse implements Response {
     }
 
     private String stringifyHeaders() {
+        generateHeaders();
+
         StringBuilder headersAsAString = new StringBuilder();
         for (Map.Entry<String, String> set : headers.entrySet()) {
             headersAsAString.append(set.getKey()).append(": ").append(set.getValue()).append(CRLF);
@@ -43,4 +48,5 @@ public class MethodNotAllowedResponse implements Response {
         headersAsAString.append(CRLF);
         return headersAsAString.toString();
     }
+
 }

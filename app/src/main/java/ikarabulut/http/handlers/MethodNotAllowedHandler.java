@@ -18,20 +18,11 @@ public class MethodNotAllowedHandler {
         this.initialLine = initialLine;
     }
 
-    public Map<String, String> generateHeaders() {
-        Map<String, String> allowHeader = new HashMap<>() {{
-            put("Allow", "HEAD, OPTIONS");
-        }};
-        return allowHeader;
-    }
-
     public Response processResponse() {
         String version = initialLine.get("httpVersion");
         StatusCode status = StatusCode.NOT_ALLOWED;
 
-        Map<String, String> headers = generateHeaders();
-
-        Response response = new MethodNotAllowedResponse(version, status, headers);
+        Response response = new MethodNotAllowedResponse(version, status);
 
         return response;
     }
