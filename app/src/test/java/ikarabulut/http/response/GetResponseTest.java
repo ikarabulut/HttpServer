@@ -50,4 +50,17 @@ class GetResponseTest {
         assertEquals(expectedResponse, stringifiedResponse);
     }
 
+    @Test
+    @DisplayName("A Header should be generated with at minimum the date")
+    void generateHeaders_DefaultDate() {
+        Map<String,String> defaultHeader = new HashMap<>() {{
+                put("Date", new Date().toString());
+            }};
+        Response response = new GetResponse(version, status);
+
+        Map<String, String> generatedHeaders = response.generateHeaders();
+
+        assertTrue(generatedHeaders.containsKey("Date"));
+    }
+
 }

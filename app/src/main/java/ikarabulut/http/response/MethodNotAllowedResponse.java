@@ -15,6 +15,11 @@ public class MethodNotAllowedResponse implements Response {
     }
 
     @Override
+    public Map<String, String> generateHeaders() {
+        return null; //TEMP
+    }
+
+    @Override
     public String stringifyResponse() {
         String statusCode = status.getStatusCode();
         String statusNumber = status.getStatusNumber();

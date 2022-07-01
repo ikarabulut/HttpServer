@@ -14,6 +14,11 @@ public class HeadResponse implements Response {
     }
 
     @Override
+    public Map<String, String> generateHeaders() {
+        return null; //TEMP
+    }
+
+    @Override
     public String stringifyResponse() {
         String statusNumber = status.getStatusNumber();
         String statusCode = status.getStatusCode();

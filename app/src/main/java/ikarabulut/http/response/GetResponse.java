@@ -1,11 +1,13 @@
 package ikarabulut.http.response;
 
+import java.util.Date;
+import java.util.HashMap;
 import java.util.Map;
 
 public class GetResponse implements Response {
     private final String version;
     private final StatusCode status;
-    private final Map<String, String> headers;
+    private Map<String, String> headers;
     private String body;
 
     public GetResponse(String version, StatusCode status, Map<String, String> headers) {
@@ -17,6 +19,23 @@ public class GetResponse implements Response {
         this.status = status;
         this.headers = headers;
         this.body = body;
+    }
+    public GetResponse(String version, StatusCode status) {
+        this(version, status,EMPTYBODY);
+    }
+
+    public GetResponse(String version, StatusCode status, String body) {
+        this.version = version;
+        this.status = status;
+        this.body = body;
+    }
+
+    public Map<String, String> generateHeaders() {
+        headers = new HashMap<>() {{
+            put("Date", new Date().toString());
+            put("Content-Language", "en-US");
+        }};
+        return headers;
     }
 
     @Override
@@ -35,6 +54,8 @@ public class GetResponse implements Response {
     }
 
     private String stringifyHeaders() {
+        generateHeaders();
+
         StringBuilder headersAsAString = new StringBuilder();
         for (Map.Entry<String, String> set : headers.entrySet()) {
             headersAsAString.append(set.getKey()).append(": ").append(set.getValue()).append(CRLF);
