@@ -8,7 +8,6 @@ import java.util.*;
 public class RequestParser {
     private ClientReader clientReader;
     private String rawRequest;
-    private String body;
 
     public RequestParser(ClientReader clientReader) {
         this.clientReader = clientReader;
@@ -51,7 +50,7 @@ public class RequestParser {
         return headers;
     }
 
-    public void parseBody() {
+    public String parseBody() {
         List splitRequest = Arrays.asList(rawRequest.split("\r?\n"));
         int indexOfEmptyLine = splitRequest.indexOf("");
 
@@ -60,12 +59,9 @@ public class RequestParser {
             for (int i = indexOfEmptyLine + 1; i < splitRequest.size(); i++) {
                 stringBuilder.append(splitRequest.get(i));
             }
-            body = stringBuilder.toString();
+            return stringBuilder.toString();
         }
-    }
-
-    public String getBody() {
-        return body;
+        return null;
     }
     
 }
