@@ -8,8 +8,8 @@ import ikarabulut.http.response.StatusCode;
 import java.util.*;
 
 public class HeadRequestHandler implements RequestHandler {
-    Map<String, String> initialLine;
-    RequestParser parsedRequest;
+    private Map<String, String> initialLine;
+    private RequestParser parsedRequest;
 
     public HeadRequestHandler(RequestParser parsedRequest) {
         this.parsedRequest = parsedRequest;
