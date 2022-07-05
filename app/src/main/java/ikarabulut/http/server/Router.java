@@ -48,14 +48,14 @@ public class Router {
     }
 
     public Response runHeadRequest() {
-        HeadRequestHandler requestRunner = new HeadRequestHandler(initialLine);
+        HeadRequestHandler requestRunner = new HeadRequestHandler(parsedRequest);
         Response response = requestRunner.processResponse();
 
         return response;
     }
 
     public Response runGetRequest() {
-        GetRequestHandler requestRunner = new GetRequestHandler(initialLine);
+        GetRequestHandler requestRunner = new GetRequestHandler(parsedRequest);
         Response response = requestRunner.processResponse();
 
         return response;
