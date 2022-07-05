@@ -11,7 +11,7 @@ public class GetResponse implements Response {
     private String body;
 
     public GetResponse(String version, StatusCode status) {
-        this(version, status,EMPTYBODY);
+        this(version, status, EMPTYBODY);
     }
 
     public GetResponse(String version, StatusCode status, String body) {
