@@ -64,11 +64,23 @@ class RequestParserTest {
 
         requestParser.parseBody();
 
-        List<String> parsedBody = requestParser.getBody();
-        List<String> expectedParsedBody = Arrays.asList("Hello World");
+        String parsedBody = requestParser.getBody();
+        String expectedParsedBody = "Hello World";
         assertEquals(expectedParsedBody, parsedBody);
     }
 
+    @Test
+    @DisplayName("A Request without a body should return a null body object")
+    void parseBody_WhenNoBody() throws IOException {
+        InputStream in = new ByteArrayInputStream(inputWithoutBody.getBytes());
+        ClientReader clientReader = new ClientReader(in);
+        RequestParser requestParser = new RequestParser(clientReader);
+
+        requestParser.parseBody();
+
+        String parsedBody = requestParser.getBody();
+        assertNull(parsedBody);
+    }
 
 
 }
