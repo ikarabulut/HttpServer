@@ -14,11 +14,6 @@ public class Router {
     private RequestParser parsedRequest;
     private Map<String, List<String>> paths;
 
-    public Router(Map<String, String> initialLine) {
-        this.initialLine = initialLine;
-        generateRoutes();
-    }
-
     public Router(RequestParser parsedRequest) {
         this.parsedRequest = parsedRequest;
         generateRoutes();
@@ -78,4 +73,5 @@ public class Router {
         String path = initialLine.get("httpPath");
         return paths.get(path);
     }
+
 }

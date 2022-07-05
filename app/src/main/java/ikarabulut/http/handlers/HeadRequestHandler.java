@@ -23,5 +23,4 @@ public class HeadRequestHandler implements RequestHandler {
         return new HeadResponse(version, status);
     }
 
-
 }

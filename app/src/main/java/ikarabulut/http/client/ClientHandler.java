@@ -8,7 +8,6 @@ import ikarabulut.http.parser.RequestParser;
 
 import java.io.*;
 import java.net.Socket;
-import java.util.Map;
 
 public class ClientHandler implements Runnable {
     private Socket clientSocket;

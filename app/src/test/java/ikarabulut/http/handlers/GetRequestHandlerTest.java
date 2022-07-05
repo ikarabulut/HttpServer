@@ -43,6 +43,4 @@ class GetRequestHandlerTest {
         assertTrue(receivedResponse.hasBody());
     }
 
-
-
 }
