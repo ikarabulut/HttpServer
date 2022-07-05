@@ -62,9 +62,8 @@ class RequestParserTest {
         ClientReader clientReader = new ClientReader(in);
         RequestParser requestParser = new RequestParser(clientReader);
 
-        requestParser.parseBody();
-
-        String parsedBody = requestParser.getBody();
+        String parsedBody = requestParser.parseBody();
+        
         String expectedParsedBody = "Hello World";
         assertEquals(expectedParsedBody, parsedBody);
     }
@@ -76,9 +75,8 @@ class RequestParserTest {
         ClientReader clientReader = new ClientReader(in);
         RequestParser requestParser = new RequestParser(clientReader);
 
-        requestParser.parseBody();
+        String parsedBody = requestParser.parseBody();
 
-        String parsedBody = requestParser.getBody();
         assertNull(parsedBody);
     }
 
