@@ -24,6 +24,7 @@ public class Router {
             put("/head_request", Arrays.asList("HEAD", "OPTIONS"));
             put("/simple_get", Arrays.asList("GET", "HEAD"));
             put("/simple_get_with_body", Arrays.asList("GET", "HEAD"));
+            put("/echo_body", Arrays.asList("POST", "HEAD"));
         }};
     }
 
@@ -38,6 +39,8 @@ public class Router {
                 return runHeadRequest();
             case "GET":
                 return runGetRequest();
+            case "POST":
+                return runPostRequest();
         }
         return null;
     }
@@ -54,6 +57,11 @@ public class Router {
         Response response = requestRunner.processResponse();
 
         return response;
+    }
+
+    public Response runPostRequest() {
+
+        return null;
     }
 
     public Response methodNotAllowed(List<String> acceptedMethods) {

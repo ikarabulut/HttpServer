@@ -63,4 +63,20 @@ class RouterTest {
         Mockito.verify(spyRouter).methodNotAllowed(Arrays.asList("HEAD", "OPTIONS"));
     }
 
+    @Test
+    @DisplayName("When a POST request is made with a valid path, then routeRequest should call runPostMethod()")
+    void routeRequest_PostRequest() {
+        RequestParser parsedRequest = mock(RequestParser.class);
+        initialLine.put("httpMethod", "POST");
+        initialLine.put("httpPath", "/echo_body");
+        initialLine.put("httpVersion", "HTTP/1.1");
+        when(parsedRequest.parseInitialLine()).thenReturn(initialLine);
+        Router router = new Router(parsedRequest);
+        Router spyRouter = Mockito.spy(router);
+
+        spyRouter.routeRequest();
+
+        Mockito.verify(spyRouter).runPostRequest();
+    }
+
 }
