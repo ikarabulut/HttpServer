@@ -5,7 +5,10 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.io.*;
+import java.nio.charset.StandardCharsets;
+import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -15,6 +18,9 @@ class RequestParserTest {
             "Content-Type" + ":" + " text/plain\r\n" +
             "User-Agent" + ":" + " PostmanRuntime/7.29.0\r\n\r\n" +
             "Hello World\r\n";
+    private String inputWithoutBody = "HEAD /test HTTP/1.1\r\n" +
+            "Content-Type" + ":" + " text/plain\r\n" +
+            "User-Agent" + ":" + " PostmanRuntime/7.29.0\r\n\r\n";
 
     @Test
     @DisplayName("When parsing the initial line, a HashMap containing 'httpMethod', 'httpPath', 'httpVersion' keys and corresponding keys should be generated")
@@ -48,6 +54,21 @@ class RequestParserTest {
 
         assertEquals(expectedHeaders, returnedHeaders);
     }
+
+    @Test
+    @DisplayName("A Request with a body should have that body parsed into a body object within RequestParser ")
+    void parseBody() throws IOException {
+        InputStream in = new ByteArrayInputStream(input.getBytes());
+        ClientReader clientReader = new ClientReader(in);
+        RequestParser requestParser = new RequestParser(clientReader);
+
+        requestParser.parseBody();
+
+        List<String> parsedBody = requestParser.getBody();
+        List<String> expectedParsedBody = Arrays.asList("Hello World");
+        assertEquals(expectedParsedBody, parsedBody);
+    }
+
 
 
 }

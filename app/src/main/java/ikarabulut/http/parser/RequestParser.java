@@ -3,12 +3,12 @@ package ikarabulut.http.parser;
 import ikarabulut.http.io.ClientReader;
 
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 public class RequestParser {
     private ClientReader clientReader;
     private String rawRequest;
+    private List<String> body = new ArrayList<>();
 
     public RequestParser(ClientReader clientReader) {
         this.clientReader = clientReader;
@@ -50,5 +50,20 @@ public class RequestParser {
         }
         return headers;
     }
+
+    public void parseBody() {
+        List splitRequest = Arrays.asList(rawRequest.split("\r?\n"));
+        int indexOfEmptyLine = splitRequest.indexOf("");
+
+        for (int i = indexOfEmptyLine + 1; i < splitRequest.size(); i++) {
+            System.out.println(splitRequest.get(i).getClass());
+            body.add((String) splitRequest.get(i));
+        }
+    }
+
+    public List<String> getBody() {
+        return this.body;
+    }
+
 
 }
