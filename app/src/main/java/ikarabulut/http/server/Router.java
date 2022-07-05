@@ -3,6 +3,7 @@ package ikarabulut.http.server;
 import ikarabulut.http.handlers.GetRequestHandler;
 import ikarabulut.http.handlers.HeadRequestHandler;
 import ikarabulut.http.handlers.MethodNotAllowedHandler;
+import ikarabulut.http.parser.RequestParser;
 import ikarabulut.http.response.Response;
 
 import java.util.*;
@@ -10,10 +11,16 @@ import java.util.*;
 
 public class Router {
     private Map<String, String> initialLine;
+    private RequestParser parsedRequest;
     private Map<String, List<String>> paths;
 
     public Router(Map<String, String> initialLine) {
         this.initialLine = initialLine;
+        generateRoutes();
+    }
+
+    public Router(RequestParser parsedRequest) {
+        this.parsedRequest = parsedRequest;
         generateRoutes();
     }
 
@@ -60,12 +67,14 @@ public class Router {
     }
 
     private boolean pathIncludesMethod() {
+        initialLine = parsedRequest.parseInitialLine();
         String method = initialLine.get("httpMethod");
         String path = initialLine.get("httpPath");
         return paths.get(path).contains(method);
     }
 
     private List<String> pathsIncludedMethods() {
+        initialLine = parsedRequest.parseInitialLine();
         String path = initialLine.get("httpPath");
         return paths.get(path);
     }
