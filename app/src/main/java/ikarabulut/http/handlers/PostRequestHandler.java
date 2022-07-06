@@ -1,6 +1,7 @@
 package ikarabulut.http.handlers;
 
 import ikarabulut.http.parser.RequestParser;
+import ikarabulut.http.response.PostResponse;
 import ikarabulut.http.response.Response;
 import ikarabulut.http.response.StatusCode;
 
@@ -19,7 +20,7 @@ public class PostRequestHandler implements RequestHandler {
         StatusCode status = StatusCode.OK;
         String body = parsedRequest.parseBody();
 
-        return null;
+        return new PostResponse(version, status, body);
     }
 
 
