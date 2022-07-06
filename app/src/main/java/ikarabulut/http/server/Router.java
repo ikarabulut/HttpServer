@@ -61,13 +61,13 @@ public class Router {
     }
 
     public Response runPostRequest() {
-        PostRequestHandler requestHandler = new PostRequestHandler(parsedRequest);
+        PostRequestHandler requestHandler = new PostRequestHandler(rawRequest);
         return requestHandler.processResponse();
     }
 
     public Response methodNotAllowed(List<String> acceptedMethods) {
-        MethodNotAllowedHandler handler = new MethodNotAllowedHandler(acceptedMethods, initialLine);
-        return handler.processResponse();
+        MethodNotAllowedHandler requestHandler = new MethodNotAllowedHandler(acceptedMethods, initialLine);
+        return requestHandler.processResponse();
     }
 
     private boolean pathIncludesMethod() {
