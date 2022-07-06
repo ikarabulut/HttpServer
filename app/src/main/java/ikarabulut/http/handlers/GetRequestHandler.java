@@ -9,17 +9,17 @@ import java.util.*;
 
 public class GetRequestHandler implements RequestHandler {
     private Map<String, String> initialLine;
-    private RequestParser parsedRequest;
+    private RequestParser rawRequest;
     private String body;
 
-    public GetRequestHandler(RequestParser parsedRequest) {
-        this.parsedRequest = parsedRequest;
+    public GetRequestHandler(RequestParser rawRequest) {
+        this.rawRequest = rawRequest;
         this.body = "Hello world";
     }
 
     @Override
     public Response processResponse() {
-        initialLine = parsedRequest.parseInitialLine();
+        initialLine = rawRequest.parseInitialLine();
         String version = initialLine.get("httpVersion");
         StatusCode status = StatusCode.OK;
 

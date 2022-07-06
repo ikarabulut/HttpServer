@@ -9,15 +9,15 @@ import java.util.*;
 
 public class HeadRequestHandler implements RequestHandler {
     private Map<String, String> initialLine;
-    private RequestParser parsedRequest;
+    private RequestParser rawRequest;
 
-    public HeadRequestHandler(RequestParser parsedRequest) {
-        this.parsedRequest = parsedRequest;
+    public HeadRequestHandler(RequestParser rawRequest) {
+        this.rawRequest = rawRequest;
     }
 
     @Override
     public Response processResponse() {
-        initialLine = parsedRequest.parseInitialLine();
+        initialLine = rawRequest.parseInitialLine();
         String version = initialLine.get("httpVersion");
         StatusCode status = StatusCode.OK;
         return new HeadResponse(version, status);

@@ -11,11 +11,11 @@ import java.util.*;
 
 public class Router {
     private Map<String, String> initialLine;
-    private RequestParser parsedRequest;
+    private RequestParser rawRequest;
     private Map<String, List<String>> paths;
 
-    public Router(RequestParser parsedRequest) {
-        this.parsedRequest = parsedRequest;
+    public Router(RequestParser rawRequest) {
+        this.rawRequest = rawRequest;
         generateRoutes();
     }
 
@@ -43,14 +43,14 @@ public class Router {
     }
 
     public Response runHeadRequest() {
-        HeadRequestHandler requestRunner = new HeadRequestHandler(parsedRequest);
+        HeadRequestHandler requestRunner = new HeadRequestHandler(rawRequest);
         Response response = requestRunner.processResponse();
 
         return response;
     }
 
     public Response runGetRequest() {
-        GetRequestHandler requestRunner = new GetRequestHandler(parsedRequest);
+        GetRequestHandler requestRunner = new GetRequestHandler(rawRequest);
         Response response = requestRunner.processResponse();
 
         return response;
@@ -62,14 +62,14 @@ public class Router {
     }
 
     private boolean pathIncludesMethod() {
-        initialLine = parsedRequest.parseInitialLine();
+        initialLine = rawRequest.parseInitialLine();
         String method = initialLine.get("httpMethod");
         String path = initialLine.get("httpPath");
         return paths.get(path).contains(method);
     }
 
     private List<String> pathsIncludedMethods() {
-        initialLine = parsedRequest.parseInitialLine();
+        initialLine = rawRequest.parseInitialLine();
         String path = initialLine.get("httpPath");
         return paths.get(path);
     }
