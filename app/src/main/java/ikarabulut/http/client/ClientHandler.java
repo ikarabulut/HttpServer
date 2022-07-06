@@ -8,7 +8,6 @@ import ikarabulut.http.parser.RequestParser;
 
 import java.io.*;
 import java.net.Socket;
-import java.util.Map;
 
 public class ClientHandler implements Runnable {
     private Socket clientSocket;
@@ -24,10 +23,9 @@ public class ClientHandler implements Runnable {
     public void run() {
         try {
             ClientReader clientReader = new ClientReader(inputStream);
-            RequestParser requestParser = new RequestParser(clientReader);
-            Map<String, String> initialLine = requestParser.parseInitialLine();
+            RequestParser parsedRequest = new RequestParser(clientReader);
 
-            Router router = new Router(initialLine);
+            Router router = new Router(parsedRequest);
             Response response = router.routeRequest();
 
             ClientWriter clientWriter = new ClientWriter(outputStream);

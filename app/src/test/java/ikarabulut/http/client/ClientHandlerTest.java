@@ -79,5 +79,4 @@ class ClientHandlerTest {
         verify(writerSpy).closeWriter();
     }
 
-
 }

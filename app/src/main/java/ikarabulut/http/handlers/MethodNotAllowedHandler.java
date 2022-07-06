@@ -3,9 +3,7 @@ package ikarabulut.http.handlers;
 import ikarabulut.http.response.MethodNotAllowedResponse;
 import ikarabulut.http.response.Response;
 import ikarabulut.http.response.StatusCode;
-import jdk.jshell.Snippet;
 
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 

@@ -3,6 +3,7 @@ package ikarabulut.http.server;
 import ikarabulut.http.handlers.GetRequestHandler;
 import ikarabulut.http.handlers.HeadRequestHandler;
 import ikarabulut.http.handlers.MethodNotAllowedHandler;
+import ikarabulut.http.parser.RequestParser;
 import ikarabulut.http.response.Response;
 
 import java.util.*;
@@ -10,10 +11,11 @@ import java.util.*;
 
 public class Router {
     private Map<String, String> initialLine;
+    private RequestParser rawRequest;
     private Map<String, List<String>> paths;
 
-    public Router(Map<String, String> initialLine) {
-        this.initialLine = initialLine;
+    public Router(RequestParser rawRequest) {
+        this.rawRequest = rawRequest;
         generateRoutes();
     }
 
@@ -41,14 +43,14 @@ public class Router {
     }
 
     public Response runHeadRequest() {
-        HeadRequestHandler requestRunner = new HeadRequestHandler(initialLine);
+        HeadRequestHandler requestRunner = new HeadRequestHandler(rawRequest);
         Response response = requestRunner.processResponse();
 
         return response;
     }
 
     public Response runGetRequest() {
-        GetRequestHandler requestRunner = new GetRequestHandler(initialLine);
+        GetRequestHandler requestRunner = new GetRequestHandler(rawRequest);
         Response response = requestRunner.processResponse();
 
         return response;
@@ -60,13 +62,16 @@ public class Router {
     }
 
     private boolean pathIncludesMethod() {
+        initialLine = rawRequest.parseInitialLine();
         String method = initialLine.get("httpMethod");
         String path = initialLine.get("httpPath");
         return paths.get(path).contains(method);
     }
 
     private List<String> pathsIncludedMethods() {
+        initialLine = rawRequest.parseInitialLine();
         String path = initialLine.get("httpPath");
         return paths.get(path);
     }
+
 }

@@ -1,7 +1,6 @@
 package ikarabulut.http.io;
 
 import java.io.*;
-import java.net.Socket;
 
 public class ClientWriter {
     OutputStream outputStream;
@@ -21,6 +20,5 @@ public class ClientWriter {
     public void closeWriter() {
         socketWriter.close();
     }
-
 
 }
