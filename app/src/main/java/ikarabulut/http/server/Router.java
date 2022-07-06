@@ -3,6 +3,7 @@ package ikarabulut.http.server;
 import ikarabulut.http.handlers.GetRequestHandler;
 import ikarabulut.http.handlers.HeadRequestHandler;
 import ikarabulut.http.handlers.MethodNotAllowedHandler;
+import ikarabulut.http.handlers.PostRequestHandler;
 import ikarabulut.http.parser.RequestParser;
 import ikarabulut.http.response.Response;
 
@@ -60,8 +61,8 @@ public class Router {
     }
 
     public Response runPostRequest() {
-
-        return null;
+        PostRequestHandler requestHandler = new PostRequestHandler(parsedRequest);
+        return requestHandler.processResponse();
     }
 
     public Response methodNotAllowed(List<String> acceptedMethods) {
