@@ -8,17 +8,17 @@ import ikarabulut.http.response.StatusCode;
 import java.util.Map;
 
 public class PostRequestHandler implements RequestHandler {
-    private RequestParser parsedRequest;
+    private RequestParser rawRequest;
 
-    public PostRequestHandler(RequestParser parsedRequest) {
-        this.parsedRequest = parsedRequest;
+    public PostRequestHandler(RequestParser rawRequest) {
+        this.rawRequest = rawRequest;
     }
 
     public Response processResponse() {
-        Map<String, String> initialLine = parsedRequest.parseInitialLine();
+        Map<String, String> initialLine = rawRequest.parseInitialLine();
         String version = initialLine.get("httpVersion");
         StatusCode status = StatusCode.OK;
-        String body = parsedRequest.parseBody();
+        String body = rawRequest.parseBody();
 
         return new PostResponse(version, status, body);
     }
