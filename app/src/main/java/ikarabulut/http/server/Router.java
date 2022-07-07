@@ -1,9 +1,6 @@
 package ikarabulut.http.server;
 
-import ikarabulut.http.handlers.GetRequestHandler;
-import ikarabulut.http.handlers.HeadRequestHandler;
-import ikarabulut.http.handlers.MethodNotAllowedHandler;
-import ikarabulut.http.handlers.PostRequestHandler;
+import ikarabulut.http.handlers.*;
 import ikarabulut.http.parser.RequestParser;
 import ikarabulut.http.response.Response;
 
@@ -32,7 +29,7 @@ public class Router {
     public Response routeRequest() {
 
         if (!resourceExists()) {
-            runPageNotFound();
+            return runPageNotFound();
         } else if(!pathIncludesMethod()) {
             return methodNotAllowed(pathsIncludedMethods());
         }
@@ -72,8 +69,9 @@ public class Router {
         return requestHandler.processResponse();
     }
 
-    public void runPageNotFound(){
-
+    public Response runPageNotFound(){
+        PageNotFoundHandler requestHandler = new PageNotFoundHandler(rawRequest);
+        return null; //TEMPORARY
     }
 
     private boolean pathIncludesMethod() {
