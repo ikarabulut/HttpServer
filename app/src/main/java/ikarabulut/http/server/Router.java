@@ -31,7 +31,9 @@ public class Router {
 
     public Response routeRequest() {
 
-        if (!pathIncludesMethod()) {
+        if (!resourceExists()) {
+            runPageNotFound();
+        } else if(!pathIncludesMethod()) {
             return methodNotAllowed(pathsIncludedMethods());
         }
 
@@ -70,6 +72,10 @@ public class Router {
         return requestHandler.processResponse();
     }
 
+    public void runPageNotFound(){
+
+    }
+
     private boolean pathIncludesMethod() {
         initialLine = rawRequest.parseInitialLine();
         String method = initialLine.get("httpMethod");
@@ -81,6 +87,12 @@ public class Router {
         initialLine = rawRequest.parseInitialLine();
         String path = initialLine.get("httpPath");
         return paths.get(path);
+    }
+
+    private boolean resourceExists() {
+        initialLine = rawRequest.parseInitialLine();
+        String resource = initialLine.get("httpPath");
+        return paths.containsKey(resource);
     }
 
 }

@@ -79,4 +79,19 @@ class RouterTest {
         Mockito.verify(spyRouter).runPostRequest();
     }
 
+    @Test
+    @DisplayName("When a request includes an unconfigured resource then runPageNotFound should be called")
+    void routeRequest_PageNotFound() {
+        RequestParser parsedRequest = mock(RequestParser.class);
+        initialLine.put("httpMethod", "POST");
+        initialLine.put("httpPath", "/unconfigured_resource");
+        initialLine.put("httpVersion", "HTTP/1.1");
+        when(parsedRequest.parseInitialLine()).thenReturn(initialLine);
+        Router router = new Router(parsedRequest);
+        Router spyRouter = Mockito.spy(router);
+
+        spyRouter.routeRequest();
+
+        Mockito.verify(spyRouter).runPageNotFound();
+    }
 }
