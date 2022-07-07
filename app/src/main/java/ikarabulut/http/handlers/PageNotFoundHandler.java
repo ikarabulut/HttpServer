@@ -1,8 +1,11 @@
 package ikarabulut.http.handlers;
 
 import ikarabulut.http.parser.RequestParser;
+import ikarabulut.http.response.PageNotFoundResponse;
 import ikarabulut.http.response.Response;
 import ikarabulut.http.response.StatusCode;
+
+import java.util.Map;
 
 public class PageNotFoundHandler implements RequestHandler {
     private StatusCode code;
@@ -13,7 +16,9 @@ public class PageNotFoundHandler implements RequestHandler {
         this.code = StatusCode.NOT_FOUND;
     }
     public Response processResponse() {
-        return null; //TEMPORARY
+        Map<String, String> initialLine = rawRequest.parseInitialLine();
+        String version = initialLine.get("httpVersion");
+        return new PageNotFoundResponse(version, this.code);
     }
 
 }
