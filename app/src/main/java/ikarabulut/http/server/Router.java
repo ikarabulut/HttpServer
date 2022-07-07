@@ -71,7 +71,7 @@ public class Router {
 
     public Response runPageNotFound(){
         PageNotFoundHandler requestHandler = new PageNotFoundHandler(rawRequest);
-        return null; //TEMPORARY
+        return requestHandler.processResponse();
     }
 
     private boolean pathIncludesMethod() {
