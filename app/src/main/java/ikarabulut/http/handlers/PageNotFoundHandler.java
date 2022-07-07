@@ -8,17 +8,16 @@ import ikarabulut.http.response.StatusCode;
 import java.util.Map;
 
 public class PageNotFoundHandler implements RequestHandler {
-    private StatusCode code;
     private RequestParser rawRequest;
 
     public PageNotFoundHandler(RequestParser rawRequest) {
         this.rawRequest = rawRequest;
-        this.code = StatusCode.NOT_FOUND;
     }
     public Response processResponse() {
         Map<String, String> initialLine = rawRequest.parseInitialLine();
+        StatusCode status = StatusCode.NOT_FOUND;
         String version = initialLine.get("httpVersion");
-        return new PageNotFoundResponse(version, this.code);
+        return new PageNotFoundResponse(version, status);
     }
 
 }
