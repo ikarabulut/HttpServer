@@ -69,7 +69,7 @@ class RequestParserTest {
     }
 
     @Test
-    @DisplayName("A Request without a body should return null")
+    @DisplayName("A Request without a body should return an empty string")
     void parseBody_WhenNoBody() throws IOException {
         InputStream in = new ByteArrayInputStream(inputWithoutBody.getBytes());
         ClientReader clientReader = new ClientReader(in);
@@ -77,7 +77,7 @@ class RequestParserTest {
 
         String parsedBody = requestParser.parseBody();
 
-        assertNull(parsedBody);
+        assertEquals("", parsedBody);
     }
 
 

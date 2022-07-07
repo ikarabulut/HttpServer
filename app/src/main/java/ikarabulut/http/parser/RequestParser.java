@@ -61,7 +61,7 @@ public class RequestParser {
             }
             return stringBuilder.toString();
         }
-        return null;
+        return "";
     }
     
 }
