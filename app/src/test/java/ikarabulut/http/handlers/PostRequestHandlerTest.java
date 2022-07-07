@@ -27,7 +27,7 @@ class PostRequestHandlerTest {
 
         requestHandler.processResponse();
 
-        verify(parsedRequest).parseInitialLine();
+        verify(parsedRequest).parseBody();
     }
 
 }

@@ -69,7 +69,7 @@ class RequestParserTest {
     }
 
     @Test
-    @DisplayName("A Request without a body should return a null body object")
+    @DisplayName("A Request without a body should return null")
     void parseBody_WhenNoBody() throws IOException {
         InputStream in = new ByteArrayInputStream(inputWithoutBody.getBytes());
         ClientReader clientReader = new ClientReader(in);
