@@ -20,7 +20,7 @@ class PostRequestHandlerTest {
     }
 
     @Test
-    @DisplayName("PostRequestHandler should echo back the body of the request by calling parseBody from the composed RequestParser")
+    @DisplayName("PostRequestHandler should call parseBody from the RequestParser within processResponse()")
     void processResponse_EchosRequestBody() {
         RequestParser parsedRequest = mock(RequestParser.class);
         RequestHandler requestHandler = new PostRequestHandler(parsedRequest);
