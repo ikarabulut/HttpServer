@@ -3,6 +3,7 @@ package ikarabulut.http.server;
 import ikarabulut.http.handlers.GetRequestHandler;
 import ikarabulut.http.handlers.HeadRequestHandler;
 import ikarabulut.http.handlers.MethodNotAllowedHandler;
+import ikarabulut.http.handlers.PostRequestHandler;
 import ikarabulut.http.parser.RequestParser;
 import ikarabulut.http.response.Response;
 
@@ -24,6 +25,7 @@ public class Router {
             put("/head_request", Arrays.asList("HEAD", "OPTIONS"));
             put("/simple_get", Arrays.asList("GET", "HEAD"));
             put("/simple_get_with_body", Arrays.asList("GET", "HEAD"));
+            put("/echo_body", Arrays.asList("POST", "HEAD"));
         }};
     }
 
@@ -38,6 +40,8 @@ public class Router {
                 return runHeadRequest();
             case "GET":
                 return runGetRequest();
+            case "POST":
+                return runPostRequest();
         }
         return null;
     }
@@ -56,9 +60,14 @@ public class Router {
         return response;
     }
 
+    public Response runPostRequest() {
+        PostRequestHandler requestHandler = new PostRequestHandler(rawRequest);
+        return requestHandler.processResponse();
+    }
+
     public Response methodNotAllowed(List<String> acceptedMethods) {
-        MethodNotAllowedHandler handler = new MethodNotAllowedHandler(acceptedMethods, initialLine);
-        return handler.processResponse();
+        MethodNotAllowedHandler requestHandler = new MethodNotAllowedHandler(acceptedMethods, initialLine);
+        return requestHandler.processResponse();
     }
 
     private boolean pathIncludesMethod() {

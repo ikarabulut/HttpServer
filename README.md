@@ -15,14 +15,6 @@ This project is built in [Java (OpenJDK 18)](https://www.oracle.com/java/technol
   - After install you can run `java --version` to confirm proper installation
 - **Gradle**
   - Follow these [Gradle doc instructions](https://gradle.org/install/)
-  
-- **[direnv](https://direnv.net/)**
-  - Used for local environment variables
-  - To install using homebrew run `brew install direnv` in your terminal
-  - Follow these instructions to hook direnv to your shell https://direnv.net/docs/hook.html
-    - For ZSH add the following line to your .zshrc file
-      - `eval "$(direnv hook zsh)"`
-
 
 ## Functional Requirements
 
@@ -39,26 +31,25 @@ This project is built in [Java (OpenJDK 18)](https://www.oracle.com/java/technol
 ---
 🟢 Simple HEAD request
 
-🔴 Simple GET request
+🟢 Simple GET request
 
 🔴 Simple OPTIONS request
 
-🔴 Simple POST request
+🟢 Simple POST request
 
 🔴 Redirect feature
 
-🔴 Method not found feature
+🟢 Method not found feature
 
 🔴 Page not found feature
 
 ## Installation
 
 ---
-1. Clone the repo to your machine, and `cd` into the directory, run the `direnv allow` to load the local env variables using direnv
+1. Clone the repo to your machine, and `cd` into the directory
 ```
 git clone https://github.com/ikarabulut/HttpServer.git
 cd HttpServer
-direnv allow
 ```
 2. Build the App
 ```
