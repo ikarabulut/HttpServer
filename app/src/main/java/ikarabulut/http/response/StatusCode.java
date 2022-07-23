@@ -2,7 +2,8 @@ package ikarabulut.http.response;
 
 public enum StatusCode {
     OK("OK" , "200"),
-    NOT_ALLOWED("NOT ALLOWED", "405");
+    NOT_ALLOWED("NOT ALLOWED", "405"),
+    NOT_FOUND("PAGE NOT FOUND", "404");
 
     final String code;
     final String number;
